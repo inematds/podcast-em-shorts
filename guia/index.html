@@ -218,7 +218,7 @@
 
   <div class="step"><div class="b">3</div><div>
     <h3>Transcreva</h3>
-    <p>Com o faster-whisper instalado, roda no seu computador. Na primeira vez, baixa o modelo de transcrição (o <code>small</code> tem algumas centenas de MB; <code>tiny</code> é mais rápido, <code>medium</code> acerta mais) — sem conta e sem API. Já tem a transcrição com tempo por palavra (o arquivo JSON que o Whisper gera)? Importe com <code>--de-json</code>.</p>
+    <p>Com o faster-whisper instalado, roda no seu computador. Na primeira vez, baixa o modelo de transcrição (o <code>small</code> tem algumas centenas de MB; <code>tiny</code> é mais rápido, <code>medium</code> acerta mais) — sem conta e sem API. Já tem a transcrição com tempo por palavra (o arquivo JSON que o Whisper gera com tempo por palavra, <code>--word_timestamps True</code>)? Importe com <code>--de-json</code>.</p>
 <pre><span class="k">.venv/bin/python pes.py transcrever</span> minha-live --modelo small --idioma pt
 <span class="c"># ou, com a transcrição pronta:</span>
 <span class="k">.venv/bin/python pes.py transcrever</span> minha-live --de-json <span class="s">transcricao.json</span></pre>
@@ -232,7 +232,7 @@
 
   <div class="step"><div class="b">5</div><div>
     <h3>Veja os candidatos e escolha</h3>
-    <p>Lista os trechos com nota, sinais e alertas. Escolha pelos códigos (c01, c03…) e dê um título curto a cada um. Achou um trecho melhor? O comando <code>palavras</code> mostra a transcrição com o número das palavras (procure com <code>--busca</code>); use esses números no <code>manual</code>.</p>
+    <p>Lista os trechos com nota, sinais e alertas. Escolha pelos códigos (c01, c03…) e dê um título curto a cada um. Achou um trecho melhor? O comando <code>palavras</code> mostra a transcrição com o número das palavras (procure com <code>--busca</code>); use esses números no <code>manual</code>: o início é o número entre colchetes no começo da linha e o fim, o número no fim de uma linha seguinte (o trecho precisa ter de 20 a 59 s).</p>
 <pre><span class="k">.venv/bin/python pes.py candidatos</span> minha-live --top 12
 <span class="k">.venv/bin/python pes.py escolher</span> minha-live c01,c03 --titulo <span class="s">"s1=O pedido que a IA acerta"</span> --titulo <span class="s">"s2=Seja o maestro dos agentes"</span>
 <span class="c"># trecho escolhido à mão: ache os números e escolha</span>
@@ -259,7 +259,8 @@
     <p>Abre uma página no seu computador com cada short, as checagens, um campo de nota e os botões <b>Aprovar</b> e <b>Refazer</b>. A decisão fica gravada em <code>revisao.json</code>.</p>
 <pre><span class="k">.venv/bin/python pes.py revisao</span> minha-live   <span class="c"># abra o endereço que aparece (http://127.0.0.1:…)</span>
 <span class="c"># para abrir no celular, na mesma rede Wi-Fi:</span>
-<span class="k">.venv/bin/python pes.py revisao</span> minha-live --host 0.0.0.0   <span class="c"># no celular: http://IP-deste-computador:porta</span></pre>
+<span class="k">.venv/bin/python pes.py revisao</span> minha-live --host 0.0.0.0   <span class="c"># no celular: http://IP-deste-computador:porta</span>
+<span class="k">hostname -I</span>   <span class="c"># Linux: mostra o IP deste computador (Mac: ipconfig getifaddr en0)</span></pre>
   </div></div>
 
   <div class="step"><div class="b">9</div><div>
