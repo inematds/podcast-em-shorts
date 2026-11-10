@@ -188,6 +188,8 @@ def rodar(a):
                 self.responder(400, str(exc), 'text/plain; charset=utf-8')
     with Servidor((a.host, a.porta), Pedido) as servidor:
         print(f'REVISAO http://{a.host}:{servidor.server_port}/', flush=True)
+        print('Para abrir no celular na mesma rede: rode com --host 0.0.0.0 '
+              'e use o IP deste computador', flush=True)
         try:
             servidor.serve_forever()
         except KeyboardInterrupt:

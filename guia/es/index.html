@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>podcast-em-shorts — tu transmisión en vivo se convierte en shorts listos para revisar</title>
-<meta name="description" content="Kit abierto de INEMA.CLUB: transforma un episodio largo (podcast, transmisión en vivo, clase) en shorts 9:16 con rostro, pantalla y subtítulos palabra por palabra, revisados cuadro por cuadro. Funciona en tu computadora; nada se publica sin tu aprobación.">
+<title>podcast-em-shorts — tu live se convierte en shorts listos para revisar</title>
+<meta name="description" content="Kit abierto de INEMA.CLUB: transforma un episodio largo (podcast, live, clase) en shorts 9:16 con rostro, pantalla y subtítulos palabra por palabra, revisados cuadro por cuadro. Funciona en tu computadora; nada se publica sin tu aprobación.">
 <link rel="alternate" hreflang="pt-BR" href="https://inematds.github.io/podcast-em-shorts/guia/">
 <link rel="alternate" hreflang="en" href="https://inematds.github.io/podcast-em-shorts/guia/en/">
 <link rel="alternate" hreflang="es" href="https://inematds.github.io/podcast-em-shorts/guia/es/">
@@ -105,6 +105,7 @@
   .shorts figure{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--card)}
   .shorts video{width:100%;aspect-ratio:9/16;display:block;background:#000}
   .shorts figcaption{padding:12px 14px;font-size:.88rem;color:var(--mut)}
+  @media(max-width:540px){pre{white-space:pre-wrap;word-break:break-word}}
 </style>
 <body>
 
@@ -121,7 +122,7 @@
     <a class="sec" href="#fluxo">Cómo funciona</a>
     <a class="sec" href="#guia">Guía de uso</a>
     <a class="sec" href="#exemplos">Ejemplos</a>
-    <a class="sec" href="#roadmap">Hoja de ruta</a>
+    <a class="sec" href="#roadmap">Próximos pasos</a>
     <span class="lang"><a href="../">PT</a><a href="../en/">EN</a><a class="on" href="./">ES</a></span>
     <button class="tgl" id="themeToggle" aria-label="Cambiar tema" title="Cambiar tema">🌙</button>
     <a class="btn" href="https://github.com/inematds/podcast-em-shorts" target="_blank" rel="noopener">GitHub</a>
@@ -133,64 +134,65 @@
   <div class="wrap">
     <div>
       <span class="chip">Kit abierto · funciona en tu computadora</span>
-      <h1>Tu transmisión en vivo se convierte en <span class="amb">shorts</span> listos para revisar</h1>
+      <h1>Tu live se convierte en <span class="amb">shorts</span> listos para revisar</h1>
       <p class="lead">Entra un episodio largo. Salen cortes 9:16 con rostro, pantalla y subtítulos palabra por palabra, ya revisados cuadro por cuadro. Nada se publica sin tu aprobación.</p>
       <div class="cta">
         <a class="btn" href="#guia">Empezar la guía</a>
         <a class="btn ghost" href="https://github.com/inematds/podcast-em-shorts" target="_blank" rel="noopener">Ver en GitHub</a>
       </div>
     </div>
-    <figure><img src="../assets/banner-es.jpg" alt="Banner: tu transmisión en vivo se convierte en shorts"></figure>
+    <figure><img src="../assets/banner-es.jpg" alt="Banner: tu live se convierte en shorts"></figure>
   </div>
 </header>
 
 <section id="resumo" class="resumo"><div class="wrap">
   <span class="chip">En resumen</span>
-  <p>podcast-em-shorts es un kit gratuito, en Python, que transforma una grabación larga (podcast, transmisión en vivo, entrevista o clase) en videos cortos verticales. Lee la transcripción, encuentra los fragmentos que se entienden por sí solos, corta en 9:16 con el rostro ampliado arriba y la pantalla abajo, agrega los subtítulos palabra por palabra y revisa cada cuadro. Es para quien graba mucho y no tiene tiempo de editar. Necesitas una computadora con Python y ffmpeg; no necesitas cuentas, claves ni servicios pagos.</p>
+  <p>podcast-em-shorts es un kit gratuito en Python que transforma una grabación larga (podcast, live, entrevista o clase) en videos cortos verticales. Lee la transcripción, señala los fragmentos que se entienden por sí solos, corta en formato 9:16 con el rostro ampliado y la pantalla abajo, agrega subtítulos palabra por palabra y revisa cada cuadro. Sirve para quienes graban mucho y no tienen tiempo para editar. Necesitas una computadora con Python y ffmpeg; no hace falta ninguna cuenta, clave ni servicio pago.</p>
 </div></section>
 
 <section id="oque"><div class="wrap">
   <span class="chip">Qué es</span>
   <h2>Tres trabajos tediosos que el kit hace automáticamente</h2>
-  <p class="sub">Elegir el fragmento, armar el formato vertical y comprobar que todo haya quedado bien. El kit hace las tres tareas y tú tomas la decisión final.</p>
+  <p class="sub">Elegir el fragmento, armar el video vertical y comprobar que nada haya quedado mal. El kit hace las tres cosas y te deja la decisión final.</p>
   <figure style="margin:0 0 26px;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000"><img src="../assets/banner-grade-es.jpg" alt="Etapas: transcribe, encuentra fragmentos, corta en 9:16, agrega subtítulos, revisa y tú apruebas" loading="lazy" style="width:100%;display:block"></figure>
   <div class="grid g3">
-    <div class="card"><h3>🔎 Encuentra los mejores fragmentos</h3><p>Lee el discurso y califica cada fragmento de 20 a 59 s: número, "tú", giro, pregunta, conclusión. Avisa cuando empieza a mitad de una frase, depende de la pantalla o incluye "suscríbete".</p></div>
-    <div class="card"><h3>✂️ Corta en 9:16 con rostro y pantalla</h3><p>Encuentra la cámara web automáticamente. Arriba, el rostro ampliado sin cortar la cabeza; abajo, la pantalla siguiendo los cambios. Título arriba y subtítulo amarillo en la palabra pronunciada.</p></div>
-    <div class="card"><h3>✅ Revisa y tú apruebas</h3><p>Revisa cada cuadro (subtítulo sobre el rostro, cabeza cortada, pantalla negra, imagen congelada, sonido) y el texto (frase completa). Una página local te muestra todo para que lo apruebes o pidas rehacer.</p></div>
+    <div class="card"><h3>🔎 Encuentra los mejores fragmentos</h3><p>Lee lo que se dice y califica cada fragmento de 20 a 59 s: número, "tú", giro, pregunta, conclusión. Avisa cuando empieza a mitad de una frase, depende de la pantalla o incluye "suscríbete".</p></div>
+    <div class="card"><h3>✂️ Recorta en 9:16 con rostro y pantalla</h3><p>Encuentra la cámara web automáticamente. Arriba, el rostro ampliado sin cortar la cabeza; abajo, la pantalla sigue los cambios. Título arriba y subtítulos amarillos palabra por palabra.</p></div>
+    <div class="card"><h3>✅ Revisa y solo tú apruebas</h3><p>Revisa cada cuadro (subtítulos sobre el rostro, cabeza cortada, pantalla negra, imagen congelada, sonido) y el texto (frase completa). Una página local te muestra todo para aprobar o pedir que lo rehagan.</p></div>
   </div>
 </div></section>
 
 <section id="fluxo"><div class="wrap">
   <span class="chip">Cómo funciona</span>
-  <h2>Un comando por etapa, o uno solo para hacerlo todo</h2>
-  <p class="sub">Cada etapa guarda un archivo en la carpeta del episodio, así que puedes detenerte, revisar y continuar. El atajo <code>tudo</code> ejecuta toda la secuencia.</p>
+  <h2>Un comando por etapa, o uno para todo</h2>
+  <p class="sub">Cada etapa guarda un archivo en la carpeta del episodio, así que puedes parar, revisar y continuar. El atajo <code>tudo</code> ejecuta la secuencia completa.</p>
   <div class="flow">
-    <span>nuevo</span><span class="arr">→</span>
-    <span>transcribir</span><span class="arr">→</span>
+    <span>novo</span><span class="arr">→</span>
+    <span>transcrever</span><span class="arr">→</span>
     <span>candidatos</span><span class="arr">→</span>
-    <span>elegir</span><span class="arr">→</span>
+    <span>escolher</span><span class="arr">→</span>
     <span>layout</span><span class="arr">→</span>
     <span>render</span><span class="arr">→</span>
-    <span>revisar</span><span class="arr">→</span>
-    <span>revisao</span><span class="arr">→</span>
+    <span>checar</span><span class="arr">→</span>
+    <span>revisión</span><span class="arr">→</span>
     <span>exportar</span>
   </div>
   <div class="grid g3" style="margin-top:22px">
-    <div class="card"><h3>3 modos de corte</h3><p><b>tela+camera</b> (live con cámara web en la esquina; pantalla+cámara), <b>camera</b> (podcast de cámara: cámara), <b>tela</b> (sin rostro: pantalla). El kit elige automáticamente.</p></div>
-    <div class="card"><h3>La marca en un solo archivo</h3><p>Colores, fuente, tamaño de los subtítulos, duración mínima y máxima, y cantidad de shorts por episodio se configuran en <code>marca/marca.json</code>. Cámbialo ahí y todo se actualiza.</p></div>
-    <div class="card"><h3>Tu comentario se convierte en regla</h3><p>¿Pediste rehacer? Convierte tu comentario en una regla propia (a partir de R200) con un comando, para que el mismo error no se repita.</p></div>
+    <div class="card"><h3>3 modos de corte</h3><p><b>tela+camera</b> (live con cámara web en una esquina): rostro arriba, pantalla abajo. <b>camera</b> (podcast con cámara): sigue el rostro. <b>tela</b> (sin rostro): pantalla al centro. El kit elige automáticamente.</p></div>
+    <div class="card"><h3>Marca en un solo archivo</h3><p>Los colores, la fuente, el tamaño de los subtítulos, la duración mínima y máxima y la cantidad de shorts por episodio están en <code>marca/marca.json</code>. Cámbialos ahí y todo se actualiza.</p></div>
+    <div class="card"><h3>Tu comentario se convierte en regla</h3><p>¿Pediste rehacerlo? Convierte tu comentario en una regla personal (desde R200) con un comando para que el mismo error no vuelva a ocurrir.</p></div>
   </div>
 </div></section>
 
 <section id="pre"><div class="wrap">
   <span class="chip">Requisitos previos</span>
   <h2>Python, ffmpeg y el kit</h2>
-  <p class="sub">Funciona en Linux y Mac, sin tarjeta gráfica. La transcripción local (faster-whisper) es opcional: también puedes importar una transcripción lista en JSON.</p>
+  <p class="sub">Funciona en Linux y Mac, sin tarjeta gráfica. La transcripción local (faster-whisper) es opcional: también puedes traer la transcripción lista en JSON.</p>
   <div class="grid g3">
-    <div class="card"><h3>Ubuntu / Debian</h3><p>Python 3.10 o posterior y ffmpeg.</p><pre><span class="k">sudo apt install</span> python3-venv ffmpeg git</pre></div>
-    <div class="card"><h3>Mac</h3><p>Con Homebrew instalado.</p><pre><span class="k">brew install</span> python ffmpeg git</pre></div>
-    <div class="card"><h3>El kit</h3><p>Descarga e instala las bibliotecas en un entorno propio.</p><pre><span class="k">git clone</span> https://github.com/inematds/podcast-em-shorts
+    <div class="card"><h3>Ubuntu / Debian</h3><p>Python 3.10 o posterior y ffmpeg. Comprueba la versión con <code>python3 --version</code>.</p><pre><span class="k">sudo apt install</span> python3-venv ffmpeg git
+<span class="k">python3 --version</span></pre></div>
+    <div class="card"><h3>Mac</h3><p>Con Homebrew instalado. En Mac el comando siempre es <code>python3</code>.</p><pre><span class="k">brew install</span> python ffmpeg git</pre></div>
+    <div class="card"><h3>El kit</h3><p>Descárgalo e instala las bibliotecas en un entorno propio (la carpeta <code>.venv</code>, que guarda las bibliotecas del kit sin modificar el resto de la computadora).</p><pre><span class="k">git clone</span> https://github.com/inematds/podcast-em-shorts
 <span class="k">cd</span> podcast-em-shorts
 <span class="k">python3 -m venv</span> .venv
 <span class="k">.venv/bin/pip install</span> -r requirements.txt faster-whisper</pre></div>
@@ -200,40 +202,41 @@
 <section id="guia"><div class="wrap">
   <span class="chip">Guía de uso · paso a paso</span>
   <h2>Del video largo a los shorts aprobados</h2>
-  <p class="sub">Los comandos de abajo usan <code>.venv/bin/python</code> (el entorno creado en los requisitos previos). Cambia <code>minha-live</code> por el nombre de tu episodio (letras minúsculas, números y guion).</p>
+  <p class="sub">Los comandos de abajo usan <code>.venv/bin/python</code> (el entorno creado en los requisitos previos). Cambia <code>minha-live</code> por el nombre de tu episodio (letras minúsculas, números y guion). Entra siempre a la carpeta antes: <code>cd podcast-em-shorts</code>. "9:16" es el video vertical del celular (1080×1920).</p>
 
   <div class="step"><div class="b">1</div><div>
-    <h3>Verifica la instalación</h3>
-    <p>Muestra <code>ok</code> o <code>falta</code> para cada componente. La primera vez descarga el detector de rostros (YuNet, ~230 KB) y verifica su integridad.</p>
+    <h3>Comprueba la instalación</h3>
+    <p>Muestra <code>ok</code> o <code>falta</code> para cada componente. La primera vez descarga el detector de rostros (YuNet, un modelo abierto de ~230 KB de OpenCV) y comprueba su integridad.</p>
 <pre><span class="k">.venv/bin/python pes.py doutor</span></pre>
   </div></div>
 
   <div class="step"><div class="b">2</div><div>
     <h3>Agrega el episodio</h3>
-    <p>Copia el video en <code>episodios/minha-live/raw/</code>. El original nunca se borra.</p>
+    <p>Copia el video en <code>episodios/minha-live/raw/</code>. El original nunca se elimina.</p>
 <pre><span class="k">.venv/bin/python pes.py novo</span> minha-live --video <span class="s">/caminho/da/live.mp4</span></pre>
   </div></div>
 
   <div class="step"><div class="b">3</div><div>
     <h3>Transcribe</h3>
-    <p>Con faster-whisper instalado, se ejecuta en tu computadora. ¿Ya tienes la transcripción con tiempos por palabra (formato de Whisper)? Impórtala con <code>--de-json</code>.</p>
+    <p>Con faster-whisper instalado, funciona en tu computadora. La primera vez descarga el modelo de transcripción (el <code>small</code> tiene algunos cientos de MB; <code>tiny</code> es más rápido, <code>medium</code> acierta más): sin cuenta ni API. ¿Ya tienes la transcripción con tiempos por palabra (el archivo JSON que genera Whisper)? Impórtala con <code>--de-json</code>.</p>
 <pre><span class="k">.venv/bin/python pes.py transcrever</span> minha-live --modelo small --idioma pt
 <span class="c"># o, con la transcripción lista:</span>
 <span class="k">.venv/bin/python pes.py transcrever</span> minha-live --de-json <span class="s">transcricao.json</span></pre>
   </div></div>
 
   <div class="step"><div class="b">4</div><div>
-    <h3>Corrige los nombres que Whisper reconoció mal</h3>
-    <p>Antes de cortar, reemplaza las palabras incorrectas para que los subtítulos salgan bien.</p>
+    <h3>Corrige los nombres que Whisper escribió mal</h3>
+    <p>Antes de recortar, reemplaza las palabras incorrectas para que los subtítulos queden bien. El reemplazo es exacto (distingue mayúsculas y minúsculas) y puedes repetir <code>--trocar</code> tantas veces como necesites.</p>
 <pre><span class="k">.venv/bin/python pes.py corrigir</span> minha-live --trocar <span class="s">"Iá=IA"</span></pre>
   </div></div>
 
   <div class="step"><div class="b">5</div><div>
     <h3>Revisa los candidatos y elige</h3>
-    <p>Lista los fragmentos con su calificación, señales y alertas. Elige por código (c01, c03…) y asigna un título corto a cada uno. ¿Encontraste un fragmento mejor al leer la transcripción? Usa <code>manual</code> con el número de la primera y la última palabra.</p>
+    <p>Enumera los fragmentos con puntuación, señales y alertas. Elige por código (c01, c03…) y asigna un título breve a cada uno. ¿Encontraste un fragmento mejor? El comando <code>palavras</code> muestra la transcripción con los números de las palabras (búscalas con <code>--busca</code>); usa esos números en <code>manual</code>.</p>
 <pre><span class="k">.venv/bin/python pes.py candidatos</span> minha-live --top 12
 <span class="k">.venv/bin/python pes.py escolher</span> minha-live c01,c03 --titulo <span class="s">"s1=O pedido que a IA acerta"</span> --titulo <span class="s">"s2=Seja o maestro dos agentes"</span>
-<span class="c"># fragmento elegido a mano (palabras 1239 a 1315):</span>
+<span class="c"># fragmento elegido manualmente: encuentra los números y elige</span>
+<span class="k">.venv/bin/python pes.py palavras</span> minha-live --busca <span class="s">"paraíso"</span>
 <span class="k">.venv/bin/python pes.py escolher</span> minha-live manual --ajustar s1=1239:1315 --titulo <span class="s">"s1=A IA te dá tudo. E a liberdade?"</span></pre>
   </div></div>
 
@@ -245,34 +248,36 @@
   </div></div>
 
   <div class="step"><div class="b">7</div><div>
-    <h3>Ejecuta las verificaciones</h3>
-    <p>Cada una termina con <code>OK</code> o <code>FALHOU: motivo</code>. ¿Falló? Elige otro fragmento o ajusta el corte: no ocultes el problema.</p>
+    <h3>Ejecuta las comprobaciones</h3>
+    <p>Cada una termina con <code>QUADROS OK</code> / <code>CONTEUDO OK</code> o <code>FALHOU: motivo</code>. Los motivos más comunes: <code>rosto_legenda</code> (los subtítulos tocaron el rostro), <code>cabeca_cortada</code>, <code>inicio_meio</code> o <code>sem_muleta</code> (el fragmento empieza a mitad de una frase o con "entonces/¿no?"). ¿Falló? Elige otro fragmento o ajusta el inicio y el final; no ocultes el error. Las reglas completas están en <code>regras/REGRAS.md</code>.</p>
 <pre><span class="k">.venv/bin/python pes.py checar-quadros</span> episodios/minha-live/clips/s1.mp4 --legendas episodios/minha-live/clips/s1.legendas.json
 <span class="k">.venv/bin/python pes.py checar-conteudo</span> minha-live s1</pre>
   </div></div>
 
   <div class="step"><div class="b">8</div><div>
     <h3>Revisa y aprueba</h3>
-    <p>Abre una página en tu computadora con cada short, las verificaciones, un campo para comentarios y los botones <b>Aprovar</b> (approve) y <b>Refazer</b> (redo). La decisión se guarda en <code>revisao.json</code>.</p>
-<pre><span class="k">.venv/bin/python pes.py revisao</span> minha-live   <span class="c"># abre la dirección que aparece (http://127.0.0.1:…)</span></pre>
+    <p>Abre una página en tu computadora con cada short, las comprobaciones, un campo para comentarios y los botones <b>Aprovar</b> (aprobar) y <b>Refazer</b> (rehacer). La decisión queda guardada en <code>revisao.json</code>.</p>
+<pre><span class="k">.venv/bin/python pes.py revisao</span> minha-live   <span class="c"># abre la dirección que aparece (http://127.0.0.1:…)</span>
+<span class="c"># para abrirla en el celular, conectado a la misma red Wi-Fi:</span>
+<span class="k">.venv/bin/python pes.py revisao</span> minha-live --host 0.0.0.0   <span class="c"># en el celular: http://IP-deste-computador:porta</span></pre>
   </div></div>
 
   <div class="step"><div class="b">9</div><div>
     <h3>Separa los aprobados</h3>
-    <p>Copia solo los aprobados en <code>aprovados/</code>, con un texto de apoyo (título y voz) para que publiques donde quieras. El kit no publica nada.</p>
+    <p>Copia solo los aprobados en <code>aprovados/</code>, junto con un texto de apoyo (título y lo que se dice) para que publiques donde quieras. El kit no publica nada.</p>
 <pre><span class="k">.venv/bin/python pes.py exportar</span> minha-live</pre>
   </div></div>
 
   <div class="step"><div class="b">10</div><div>
     <h3>Convierte el comentario en una regla</h3>
-    <p>El último comentario del short se convierte en una regla propia en <code>regras/MINHAS-REGRAS.md</code> (R200, R201…).</p>
+    <p>El último comentario sobre el short se convierte en una regla personal en <code>regras/MINHAS-REGRAS.md</code>. Las reglas del kit van de R1 a R32; las tuyas empiezan en R200.</p>
 <pre><span class="k">.venv/bin/python pes.py regra</span> --da-nota minha-live s1
 <span class="k">.venv/bin/python pes.py regra</span> <span class="s">"Título com no máximo 5 palavras"</span> --quem conteudo</pre>
   </div></div>
 
   <div class="step"><div class="b">⚡</div><div>
     <h3>Atajo: todo de una vez</h3>
-    <p>Transcribe (o importa), elige los mejores sin alertas, corta, revisa y muestra el comando de revisión. Nunca aprueba automáticamente.</p>
+    <p>Después del paso 2 (<code>novo</code>), un solo comando transcribe (o importa), elige los mejores fragmentos sin alertas, recorta, revisa y muestra el comando para abrir la página de revisión. Nunca aprueba automáticamente, y el título automático es el comienzo de lo que se dice: cámbialo por un título propio con <code>escolher</code> antes de publicar.</p>
 <pre><span class="k">.venv/bin/python pes.py tudo</span> minha-live --modelo small --idioma pt
 <span class="c"># o con la transcripción lista:</span>
 <span class="k">.venv/bin/python pes.py tudo</span> minha-live --de-json <span class="s">transcricao.json</span></pre>
@@ -280,38 +285,38 @@
 
   <div class="step"><div class="b">🤖</div><div>
     <h3>Con Claude Code o Codex</h3>
-    <p>El kit incluye una skill con el orden de los pasos y cuándo detenerse. Copia la carpeta a las skills de tu agente y pídele "faz os shorts da minha live". Sin agente, sigue los pasos de arriba a mano.</p>
+    <p>El kit incluye una skill (un archivo de instrucciones que lee el agente) con el orden de los pasos y cuándo detenerse. Copia la carpeta a las skills de tu agente y pídele "haz los shorts de mi live". Si no usas un agente, sigue los pasos anteriores manualmente.</p>
 <pre><span class="k">mkdir -p</span> ~/.claude/skills <span class="k">&amp;&amp; cp -r</span> skill/podcast-em-shorts ~/.claude/skills/
-<span class="c"># Codex: lee skill/podcast-em-shorts/SKILL.md al inicio de la conversación</span></pre>
+<span class="c"># Codex: lee skill/podcast-em-shorts/SKILL.md al iniciar la conversación</span></pre>
   </div></div>
 </div></section>
 
 <section id="exemplos"><div class="wrap">
   <span class="chip">Ejemplos</span>
-  <h2>Tres shorts extraídos de una transmisión en vivo de 57 minutos</h2>
-  <p class="sub">Transmisión en vivo "IA Superinteligente", con pantalla compartida y cámara web en la esquina. Transcripción de 6.443 palabras. Los tres pasan las verificaciones de cuadros y contenido. Con la transcripción lista, el atajo <code>tudo</code> tardó 1 min 20 s desde el video hasta los tres shorts revisados, con la máquina libre.</p>
+  <h2>Tres shorts extraídos de un live de 57 minutos</h2>
+  <p class="sub">Live "IA Superinteligente", con pantalla compartida y cámara web en una esquina. Transcripción de 6.443 palabras. Los tres pasan las comprobaciones de cuadros y contenido. Con la transcripción lista, el atajo <code>tudo</code> tardó 1 min 20 s desde el video hasta los tres shorts revisados, con la computadora desocupada.</p>
   <div class="shorts">
-    <figure><video controls preload="none" playsinline poster="../assets/ex-s1.jpg" src="../../exemplos/live-s1.mp4"></video><figcaption><b>A IA te dá tudo. E a liberdade?</b> (La IA te da todo. ¿Y la libertad?) · 33 s · fragmento elegido a mano, "Iá" corregido a "IA"</figcaption></figure>
+    <figure><video controls preload="none" playsinline poster="../assets/ex-s1.jpg" src="../../exemplos/live-s1.mp4"></video><figcaption><b>A IA te dá tudo. E a liberdade?</b> (La IA te da todo. ¿Y la libertad?) · 33 s · fragmento elegido manualmente, "Iá" corregido a "IA"</figcaption></figure>
     <figure><video controls preload="none" playsinline poster="../assets/ex-s2.jpg" src="../../exemplos/live-s2.mp4"></video><figcaption><b>Seja o maestro dos agentes</b> (Sé el director de los agentes) · 26 s · idea completa, del problema a la conclusión</figcaption></figure>
-    <figure><video controls preload="none" playsinline poster="../assets/ex-s3.jpg" src="../../exemplos/live-s3.mp4"></video><figcaption><b>O pedido que a IA acerta</b> (La petición que la IA acierta) · 35 s · consejo práctico que se entiende por sí solo</figcaption></figure>
+    <figure><video controls preload="none" playsinline poster="../assets/ex-s3.jpg" src="../../exemplos/live-s3.mp4"></video><figcaption><b>O pedido que a IA acerta</b> (La solicitud que la IA entiende) · 35 s · consejo práctico que se entiende por sí solo</figcaption></figure>
   </div>
   <div class="ex" style="margin-top:22px">
-    <figure><img src="../assets/revisao-desk.jpg" alt="Página de revisión en la computadora" loading="lazy"><figcaption>Página de revisión: video, verificaciones, comentario, Aprovar y Refazer.</figcaption></figure>
-    <figure><img src="../assets/revisao-cel.jpg" alt="Página de revisión en el celular" loading="lazy" style="max-width:300px;margin:0 auto"><figcaption>La misma página en el celular, en tu red local.</figcaption></figure>
+    <figure><img src="../assets/revisao-desk.jpg" alt="Página de revisión en la computadora" loading="lazy"><figcaption>Página de revisión: video, comprobaciones, comentario, Aprovar y Refazer.</figcaption></figure>
+    <figure><img src="../assets/revisao-cel.jpg" alt="Página de revisión en el celular" loading="lazy" style="max-width:300px;margin:0 auto"><figcaption>La misma página en el celular (con <code>--host 0.0.0.0</code>, en la misma red Wi-Fi).</figcaption></figure>
   </div>
   <div class="grid g2" style="margin-top:22px">
-    <div class="card"><h3>Qué detectaron las verificaciones</h3><p>Al crear estos ejemplos, las verificaciones rechazaron un fragmento que empezaba con "Então," y un caso en que interpretaron una mano que apuntaba al rostro como un segundo rostro. Cambiamos el primer fragmento; el segundo se convirtió en una corrección del detector, con una prueba.</p></div>
-    <div class="card"><h3>Qué detectó la mirada humana</h3><p>Al revisar cuadro por cuadro, encontramos una segunda cabeza cortada en la parte superior cuando la cabeza tocaba el borde de la cámara web. Se convirtió en una regla: el recorte nunca sale de la ventana de la cámara web. Por eso la revisión humana sigue siendo obligatoria.</p></div>
+    <div class="card"><h3>Lo que detectaron las comprobaciones</h3><p>Al crear estos ejemplos, las comprobaciones rechazaron un fragmento que empezaba con "Entonces," y un caso en que interpretó la mano que apuntaba al rostro como un segundo rostro. Cambiamos el primer fragmento; el segundo llevó a corregir el detector, con una prueba.</p></div>
+    <div class="card"><h3>Lo que detectó el ojo</h3><p>Al revisar cuadro por cuadro, encontramos una segunda cabeza cortada en la parte superior cuando la cabeza tocaba el borde de la cámara web. Se convirtió en una regla: el recorte nunca sale de la ventana de la cámara web. Por eso la revisión humana sigue siendo obligatoria.</p></div>
   </div>
 </div></section>
 
 <section id="roadmap"><div class="wrap">
-  <span class="chip">Hoja de ruta</span>
+  <span class="chip">Próximos pasos</span>
   <h2>Lo que ya existe y lo que viene</h2>
   <p class="sub">La versión actual cubre el proceso completo de un episodio con una persona.</p>
-  <div class="phase"><div class="tag">Listo</div><div class="d"><strong>Episodio → shorts para revisar</strong><span>Transcripción local o importada, candidatos calificados, 3 modos de corte, subtítulos palabra por palabra, verificaciones de imagen y texto, página de revisión, exportación y reglas personales. 36 pruebas automáticas.</span></div></div>
+  <div class="phase"><div class="tag">Listo</div><div class="d"><strong>Episodio → shorts para revisar</strong><span>Transcripción local o importada, candidatos con puntuación, 3 modos de corte, subtítulos palabra por palabra, comprobaciones de cuadro y texto, página de revisión, exportación y reglas personales. 36 pruebas automáticas.</span></div></div>
   <div class="phase"><div class="tag">Siguiente</div><div class="d"><strong>Dos personas en la conversación</strong><span>Alternar entre los rostros de quienes hablan en podcasts con dos cámaras.</span></div></div>
-  <div class="phase"><div class="tag">Después</div><div class="d"><strong>Gráfico por fragmento</strong><span>Una tarjeta animada cuando el discurso incluye una cifra o comparación.</span></div></div>
+  <div class="phase"><div class="tag">Después</div><div class="d"><strong>Gráfico por fragmento</strong><span>Una tarjeta animada cuando lo que se dice incluye un número o una comparación.</span></div></div>
 </div></section>
 
 <footer>

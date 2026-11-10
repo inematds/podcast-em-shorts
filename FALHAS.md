@@ -1,5 +1,6 @@
 | data | o que quebrou | menor correção | prompt \| infra |
 |---|---|---|---|
+| 2026-11-10 | Escolha manual exigia índices sem consulta legível; comando de revisão perdia a venv e faltava dica de rede | adicionar palavras e ini/fim nos candidatos, imprimir sys.executable e caminho relativo na raiz, orientar acesso pelo celular | infra |
 | 2026-11-10 | Webcam desfocada no preenchimento mostrava segunda cabeça no topo de s3 | trocar somente o preenchimento por degradê da marca sem pixels da webcam, com transição alfa de 40 px | infra |
 | 2026-11-10 | Degradê escurecido abaixo de fundo reprovou a checagem de faixa preta (35/36) | iniciar na cor fundo sem escurecer e clarear suavemente até 115% de luminância | infra |
 | 2026-11-10 | Cópia auxiliar de evidências buscou relatório de conteúdo em clips/ | copiar de work/, destino definido por conteudo.py | infra |

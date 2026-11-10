@@ -34,8 +34,12 @@ O kit usa somente processamento local. Os testes estão congelados.
 Todos os subcomandos aceitam `--raiz <pasta>` para marca, regras e episódios.
 `tudo <ep> --de-json <arquivo>` executa os passos automáticos, escolhe até a
 quantidade da marca sem alertas e apresenta o resumo e o comando de revisão.
+Esse comando usa o interpretador em execução (`sys.executable`, inclusive venv)
+e o caminho relativo `pes.py` quando a pasta atual é a raiz do kit.
 Nunca aprova automaticamente. Um resumo reprovado mantém saída 1.
 `revisao --so-html` cria uma página estática; decisões exigem o servidor local.
+O servidor imprime endereço e dica para celular: use `revisao <ep> --host 0.0.0.0`
+e abra o IP deste computador na mesma rede, com a porta exibida.
 
 ## Correção de palavras e seleção manual
 
@@ -44,6 +48,7 @@ Antes do render, corrija nomes com:
 ```bash
 python3 pes.py corrigir meu-ep --trocar "Iá=IA" --trocar "Whisper=Wisper"
 python3 pes.py corrigir meu-ep --trocar "Iá=IA" --de 1239 --ate 1315
+python3 pes.py palavras meu-ep --de 540 --ate 600 --busca "liberdade"
 python3 pes.py escolher meu-ep manual --ajustar s1=1239:1315 --titulo "s1=Liberdade e IA"
 ```
 
@@ -54,6 +59,14 @@ são índices inclusivos, começando em zero; omitidos, abrangem a transcrição
 O comando imprime a quantidade de palavras alteradas. Gere candidatos de novo
 para atualizar seus textos; renderize novamente os cortes afetados. A correção
 invalida a aprovação desses cortes, sem alterar títulos escolhidos manualmente.
+
+`palavras <ep> [--de <segundos>] [--ate <segundos>] [--busca <texto>]`
+exibe frases inteiras que cruzam o intervalo, com limites inclusivos. Esses
+filtros são opcionais e combináveis; a busca ignora maiúsculas e acentos.
+Formato: `[1239] 09:27.7  Texto da frase.[1255]` — primeiro e último índices,
+começando em zero, com o tempo inicial em minutos:segundos. Aqui `--de`/`--ate`
+são segundos; em `corrigir` são índices. Pontuação final ou pausa acima de
+0,8 s separa frases. `candidatos` também exibe `ini`/`fim` na tabela legível.
 
 `manual` dispensa candidatos e exige `--ajustar sN=ini:fim` para cada seleção.
 Pode misturar: `escolher meu-ep c01,manual --ajustar s2=1239:1315`.

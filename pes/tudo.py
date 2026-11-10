@@ -1,7 +1,10 @@
 """Pipeline local com reprovações explícitas e parada em erro de infraestrutura."""
+import shlex
+import sys
+from pathlib import Path
 from types import SimpleNamespace
 from . import transcrever, candidatos, escolher, layout, render, quadros, conteudo
-from .util import episodio, marca, ler, salvar, clips
+from .util import RAIZ, episodio, marca, ler, salvar, clips, raiz
 
 
 def rodar(a):
@@ -31,8 +34,9 @@ def rodar(a):
         print(c['id'] + ': quadros ' + ('OK' if q['ok'] else 'REPROVADO')
               + '; conteúdo ' + ('OK' if co['ok'] else 'REPROVADO'))
     salvar(pasta / 'work/resumo.json', resumo)
-    import shlex
-    from .util import RAIZ
-    print('Revisão: python3 ' + shlex.quote(str(RAIZ / 'pes.py')) + ' revisao ' + a.ep
-          + ' --raiz ' + shlex.quote(str(a.raiz)))
+    na_raiz = Path.cwd().resolve() == RAIZ
+    script = 'pes.py' if na_raiz else str(RAIZ / 'pes.py')
+    destino = '.' if na_raiz and raiz(a) == RAIZ else str(raiz(a))
+    print('Revisão: ' + shlex.join([sys.executable, script, 'revisao', a.ep,
+                                    '--raiz', destino]))
     return 0 if all(r['quadros']['ok'] and r['conteudo']['ok'] for r in resumo) else 1

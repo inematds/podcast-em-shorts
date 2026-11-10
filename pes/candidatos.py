@@ -98,7 +98,8 @@ def rodar(a):
         print(json.dumps(resultado, ensure_ascii=False))
     else:
         for c in resultado:
-            print(f"{c['id']}  {c['s']:.2f}–{c['e']:.2f}s  nota {c['nota']:.1f}  "
+            print(f"{c['id']}  ini={c['ini']} fim={c['fim']}  "
+                  f"{c['s']:.2f}–{c['e']:.2f}s  nota {c['nota']:.1f}  "
                   + ', '.join(c['alertas']) + '\n  ' + c['texto'])
         if not resultado:
             print('Nenhum trecho dentro da duração da marca.')

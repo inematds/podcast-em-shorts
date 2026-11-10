@@ -105,6 +105,7 @@
   .shorts figure{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--card)}
   .shorts video{width:100%;aspect-ratio:9/16;display:block;background:#000}
   .shorts figcaption{padding:12px 14px;font-size:.88rem;color:var(--mut)}
+  @media(max-width:540px){pre{white-space:pre-wrap;word-break:break-word}}
 </style>
 <body>
 
@@ -188,9 +189,10 @@
   <h2>Python, ffmpeg e o kit</h2>
   <p class="sub">Funciona em Linux e Mac, sem placa de vídeo. A transcrição local (faster-whisper) é opcional: você também pode trazer a transcrição pronta em JSON.</p>
   <div class="grid g3">
-    <div class="card"><h3>Ubuntu / Debian</h3><p>Python 3.10 ou mais novo e ffmpeg.</p><pre><span class="k">sudo apt install</span> python3-venv ffmpeg git</pre></div>
-    <div class="card"><h3>Mac</h3><p>Com o Homebrew instalado.</p><pre><span class="k">brew install</span> python ffmpeg git</pre></div>
-    <div class="card"><h3>O kit</h3><p>Baixe e instale as bibliotecas num ambiente próprio.</p><pre><span class="k">git clone</span> https://github.com/inematds/podcast-em-shorts
+    <div class="card"><h3>Ubuntu / Debian</h3><p>Python 3.10 ou mais novo e ffmpeg. Confira a versão com <code>python3 --version</code>.</p><pre><span class="k">sudo apt install</span> python3-venv ffmpeg git
+<span class="k">python3 --version</span></pre></div>
+    <div class="card"><h3>Mac</h3><p>Com o Homebrew instalado. No Mac o comando é sempre <code>python3</code>.</p><pre><span class="k">brew install</span> python ffmpeg git</pre></div>
+    <div class="card"><h3>O kit</h3><p>Baixe e instale as bibliotecas num ambiente próprio (a pasta <code>.venv</code>, que guarda as bibliotecas do kit sem mexer no resto do computador).</p><pre><span class="k">git clone</span> https://github.com/inematds/podcast-em-shorts
 <span class="k">cd</span> podcast-em-shorts
 <span class="k">python3 -m venv</span> .venv
 <span class="k">.venv/bin/pip install</span> -r requirements.txt faster-whisper</pre></div>
@@ -200,11 +202,11 @@
 <section id="guia"><div class="wrap">
   <span class="chip">Guia de uso · passo a passo</span>
   <h2>Do vídeo longo aos shorts aprovados</h2>
-  <p class="sub">Os comandos abaixo usam <code>.venv/bin/python</code> (o ambiente criado nos pré-requisitos). Troque <code>minha-live</code> pelo nome do seu episódio (letras minúsculas, números e hífen).</p>
+  <p class="sub">Os comandos abaixo usam <code>.venv/bin/python</code> (o ambiente criado nos pré-requisitos). Troque <code>minha-live</code> pelo nome do seu episódio (letras minúsculas, números e hífen). Sempre entre na pasta antes: <code>cd podcast-em-shorts</code>. "9:16" é o vídeo em pé do celular (1080×1920).</p>
 
   <div class="step"><div class="b">1</div><div>
     <h3>Confira a instalação</h3>
-    <p>Mostra <code>ok</code> ou <code>falta</code> para cada peça. Na primeira vez baixa o detector de rosto (YuNet, ~230 KB) e confere a integridade.</p>
+    <p>Mostra <code>ok</code> ou <code>falta</code> para cada peça. Na primeira vez baixa o detector de rosto (YuNet, um modelo aberto de ~230 KB do OpenCV) e confere a integridade.</p>
 <pre><span class="k">.venv/bin/python pes.py doutor</span></pre>
   </div></div>
 
@@ -216,7 +218,7 @@
 
   <div class="step"><div class="b">3</div><div>
     <h3>Transcreva</h3>
-    <p>Com o faster-whisper instalado, roda no seu computador. Já tem a transcrição com tempo por palavra (formato do Whisper)? Importe com <code>--de-json</code>.</p>
+    <p>Com o faster-whisper instalado, roda no seu computador. Na primeira vez, baixa o modelo de transcrição (o <code>small</code> tem algumas centenas de MB; <code>tiny</code> é mais rápido, <code>medium</code> acerta mais) — sem conta e sem API. Já tem a transcrição com tempo por palavra (o arquivo JSON que o Whisper gera)? Importe com <code>--de-json</code>.</p>
 <pre><span class="k">.venv/bin/python pes.py transcrever</span> minha-live --modelo small --idioma pt
 <span class="c"># ou, com a transcrição pronta:</span>
 <span class="k">.venv/bin/python pes.py transcrever</span> minha-live --de-json <span class="s">transcricao.json</span></pre>
@@ -224,16 +226,17 @@
 
   <div class="step"><div class="b">4</div><div>
     <h3>Corrija nomes que o Whisper errou</h3>
-    <p>Antes de cortar, troque palavras erradas para a legenda sair certa.</p>
+    <p>Antes de cortar, troque palavras erradas para a legenda sair certa. A troca é exata (maiúscula conta) e você pode repetir <code>--trocar</code> quantas vezes precisar.</p>
 <pre><span class="k">.venv/bin/python pes.py corrigir</span> minha-live --trocar <span class="s">"Iá=IA"</span></pre>
   </div></div>
 
   <div class="step"><div class="b">5</div><div>
     <h3>Veja os candidatos e escolha</h3>
-    <p>Lista os trechos com nota, sinais e alertas. Escolha pelos códigos (c01, c03…) e dê um título curto a cada um. Achou um trecho melhor lendo a transcrição? Use <code>manual</code> com o número da primeira e da última palavra.</p>
+    <p>Lista os trechos com nota, sinais e alertas. Escolha pelos códigos (c01, c03…) e dê um título curto a cada um. Achou um trecho melhor? O comando <code>palavras</code> mostra a transcrição com o número das palavras (procure com <code>--busca</code>); use esses números no <code>manual</code>.</p>
 <pre><span class="k">.venv/bin/python pes.py candidatos</span> minha-live --top 12
 <span class="k">.venv/bin/python pes.py escolher</span> minha-live c01,c03 --titulo <span class="s">"s1=O pedido que a IA acerta"</span> --titulo <span class="s">"s2=Seja o maestro dos agentes"</span>
-<span class="c"># trecho escolhido à mão (palavras 1239 a 1315):</span>
+<span class="c"># trecho escolhido à mão: ache os números e escolha</span>
+<span class="k">.venv/bin/python pes.py palavras</span> minha-live --busca <span class="s">"paraíso"</span>
 <span class="k">.venv/bin/python pes.py escolher</span> minha-live manual --ajustar s1=1239:1315 --titulo <span class="s">"s1=A IA te dá tudo. E a liberdade?"</span></pre>
   </div></div>
 
@@ -246,7 +249,7 @@
 
   <div class="step"><div class="b">7</div><div>
     <h3>Rode as checagens</h3>
-    <p>Cada uma termina com <code>OK</code> ou <code>FALHOU: motivo</code>. Falhou? Escolha outro trecho ou ajuste o corte — não esconda a falha.</p>
+    <p>Cada uma termina com <code>QUADROS OK</code> / <code>CONTEUDO OK</code> ou <code>FALHOU: motivo</code>. Os motivos mais comuns: <code>rosto_legenda</code> (legenda encostou no rosto), <code>cabeca_cortada</code>, <code>inicio_meio</code> ou <code>sem_muleta</code> (o trecho começa no meio da frase ou com "então/né"). Falhou? Escolha outro trecho ou ajuste o início e o fim — não esconda a falha. As regras completas estão em <code>regras/REGRAS.md</code>.</p>
 <pre><span class="k">.venv/bin/python pes.py checar-quadros</span> episodios/minha-live/clips/s1.mp4 --legendas episodios/minha-live/clips/s1.legendas.json
 <span class="k">.venv/bin/python pes.py checar-conteudo</span> minha-live s1</pre>
   </div></div>
@@ -254,7 +257,9 @@
   <div class="step"><div class="b">8</div><div>
     <h3>Revise e aprove</h3>
     <p>Abre uma página no seu computador com cada short, as checagens, um campo de nota e os botões <b>Aprovar</b> e <b>Refazer</b>. A decisão fica gravada em <code>revisao.json</code>.</p>
-<pre><span class="k">.venv/bin/python pes.py revisao</span> minha-live   <span class="c"># abra o endereço que aparece (http://127.0.0.1:…)</span></pre>
+<pre><span class="k">.venv/bin/python pes.py revisao</span> minha-live   <span class="c"># abra o endereço que aparece (http://127.0.0.1:…)</span>
+<span class="c"># para abrir no celular, na mesma rede Wi-Fi:</span>
+<span class="k">.venv/bin/python pes.py revisao</span> minha-live --host 0.0.0.0   <span class="c"># no celular: http://IP-deste-computador:porta</span></pre>
   </div></div>
 
   <div class="step"><div class="b">9</div><div>
@@ -265,14 +270,14 @@
 
   <div class="step"><div class="b">10</div><div>
     <h3>Transforme a nota numa regra</h3>
-    <p>A última nota do short vira uma regra sua em <code>regras/MINHAS-REGRAS.md</code> (R200, R201…).</p>
+    <p>A última nota do short vira uma regra sua em <code>regras/MINHAS-REGRAS.md</code>. As regras do kit vão de R1 a R32; as suas começam em R200.</p>
 <pre><span class="k">.venv/bin/python pes.py regra</span> --da-nota minha-live s1
 <span class="k">.venv/bin/python pes.py regra</span> <span class="s">"Título com no máximo 5 palavras"</span> --quem conteudo</pre>
   </div></div>
 
   <div class="step"><div class="b">⚡</div><div>
     <h3>Atalho: tudo de uma vez</h3>
-    <p>Transcreve (ou importa), escolhe os melhores sem alerta, corta, checa e mostra o comando da revisão. Nunca aprova sozinho.</p>
+    <p>Depois do passo 2 (<code>novo</code>), um comando só transcreve (ou importa), escolhe os melhores sem alerta, corta, checa e mostra o comando da revisão. Nunca aprova sozinho, e o título automático é o começo da fala: troque por um título seu com <code>escolher</code> antes de postar.</p>
 <pre><span class="k">.venv/bin/python pes.py tudo</span> minha-live --modelo small --idioma pt
 <span class="c"># ou com transcrição pronta:</span>
 <span class="k">.venv/bin/python pes.py tudo</span> minha-live --de-json <span class="s">transcricao.json</span></pre>
@@ -280,7 +285,7 @@
 
   <div class="step"><div class="b">🤖</div><div>
     <h3>Com Claude Code ou Codex</h3>
-    <p>O kit traz uma skill com a ordem dos passos e quando parar. Copie a pasta para as skills do seu agente e peça "faz os shorts da minha live". Sem agente, siga os passos acima à mão.</p>
+    <p>O kit traz uma skill (um arquivo de instruções que o agente lê) com a ordem dos passos e quando parar. Copie a pasta para as skills do seu agente e peça "faz os shorts da minha live". Sem agente, siga os passos acima à mão.</p>
 <pre><span class="k">mkdir -p</span> ~/.claude/skills <span class="k">&amp;&amp; cp -r</span> skill/podcast-em-shorts ~/.claude/skills/
 <span class="c"># Codex: leia skill/podcast-em-shorts/SKILL.md no início da conversa</span></pre>
   </div></div>
@@ -297,7 +302,7 @@
   </div>
   <div class="ex" style="margin-top:22px">
     <figure><img src="assets/revisao-desk.jpg" alt="Página de revisão no computador" loading="lazy"><figcaption>Página de revisão: vídeo, checagens, nota, Aprovar e Refazer.</figcaption></figure>
-    <figure><img src="assets/revisao-cel.jpg" alt="Página de revisão no celular" loading="lazy" style="max-width:300px;margin:0 auto"><figcaption>A mesma página no celular, na sua rede local.</figcaption></figure>
+    <figure><img src="assets/revisao-cel.jpg" alt="Página de revisão no celular" loading="lazy" style="max-width:300px;margin:0 auto"><figcaption>A mesma página no celular (com <code>--host 0.0.0.0</code>, na mesma rede Wi-Fi).</figcaption></figure>
   </div>
   <div class="grid g2" style="margin-top:22px">
     <div class="card"><h3>O que as checagens pegaram</h3><p>Na construção destes exemplos, as checagens reprovaram um trecho que começava com "Então," e um caso em que a mão apontando para o rosto foi lida como segundo rosto. O primeiro trocamos de trecho; o segundo virou correção no detector, com teste.</p></div>

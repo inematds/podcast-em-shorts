@@ -11,7 +11,7 @@ def parser():
     p.add_argument('--raiz', default=str(Path(__file__).resolve().parent))
     subs = p.add_subparsers(dest='comando', required=True)
     modulos = {'checar-quadros': 'quadros', 'checar-conteudo': 'conteudo', 'regra': 'regras'}
-    for nome in ('novo', 'transcrever', 'corrigir', 'candidatos', 'escolher', 'gancho', 'layout',
+    for nome in ('novo', 'transcrever', 'corrigir', 'palavras', 'candidatos', 'escolher', 'gancho', 'layout',
                  'render', 'checar-quadros', 'checar-conteudo', 'revisao', 'regra',
                  'exportar', 'doutor', 'tudo'):
         s = subs.add_parser(nome)
@@ -32,6 +32,10 @@ def parser():
             s.add_argument('--forcar', action='store_true')
         if nome == 'candidatos':
             s.add_argument('--top', type=int, default=12)
+        if nome == 'palavras':
+            s.add_argument('--de', type=float, help='Início do intervalo em segundos')
+            s.add_argument('--ate', type=float, help='Fim do intervalo em segundos')
+            s.add_argument('--busca', help='Texto da frase, sem distinguir maiúsculas ou acentos')
         if nome == 'escolher':
             s.add_argument('ids')
             s.add_argument('--titulo', action='append', default=[])

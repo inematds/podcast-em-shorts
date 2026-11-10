@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>podcast-em-shorts — turn your live stream into shorts ready for review</title>
-<meta name="description" content="Open INEMA.CLUB kit: turns a long episode (podcast, live stream, class) into 9:16 shorts with a face, screen, and word-by-word captions, checked frame by frame. Runs on your computer; nothing is published without your approval.">
+<meta name="description" content="An open INEMA.CLUB kit: turns a long episode (podcast, live stream, class) into 9:16 shorts with a face, screen, and word-by-word captions, checked frame by frame. Runs on your computer; nothing is published without your approval.">
 <link rel="alternate" hreflang="pt-BR" href="https://inematds.github.io/podcast-em-shorts/guia/">
 <link rel="alternate" hreflang="en" href="https://inematds.github.io/podcast-em-shorts/guia/en/">
 <link rel="alternate" hreflang="es" href="https://inematds.github.io/podcast-em-shorts/guia/es/">
@@ -105,6 +105,7 @@
   .shorts figure{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--card)}
   .shorts video{width:100%;aspect-ratio:9/16;display:block;background:#000}
   .shorts figcaption{padding:12px 14px;font-size:.88rem;color:var(--mut)}
+  @media(max-width:540px){pre{white-space:pre-wrap;word-break:break-word}}
 </style>
 <body>
 
@@ -133,38 +134,38 @@
   <div class="wrap">
     <div>
       <span class="chip">Open kit · runs on your computer</span>
-      <h1>Turn your live stream into <span class="amb">shorts</span> ready for review</h1>
+      <h1>Your live stream becomes <span class="amb">shorts</span> ready for review</h1>
       <p class="lead">Start with a long episode. Get 9:16 clips with a face, screen, and word-by-word captions, checked frame by frame. Nothing is published without your approval.</p>
       <div class="cta">
         <a class="btn" href="#guia">Start the guide</a>
         <a class="btn ghost" href="https://github.com/inematds/podcast-em-shorts" target="_blank" rel="noopener">View on GitHub</a>
       </div>
     </div>
-    <figure><img src="../assets/banner-en.jpg" alt="Banner: turn your live stream into shorts"></figure>
+    <figure><img src="../assets/banner-en.jpg" alt="Banner: your live stream becomes shorts"></figure>
   </div>
 </header>
 
 <section id="resumo" class="resumo"><div class="wrap">
   <span class="chip">In short</span>
-  <p>podcast-em-shorts is a free Python toolkit that turns a long recording (podcast, live stream, interview, or class) into short vertical videos. It reads the transcript, finds segments that make sense on their own, cuts them to 9:16 with the face enlarged and the screen below, adds word-by-word captions, and checks every frame. It is for people who record a lot and don't have time to edit. You need a computer with Python and ffmpeg; no account, key, or paid service required.</p>
+  <p>podcast-em-shorts is a free Python kit that turns a long recording (podcast, live stream, interview, or class) into short vertical videos. It reads the transcript, identifies clips that make sense on their own, cuts them into 9:16 format with the face enlarged and the screen below, adds word-by-word captions, and checks every frame. It is for people who record a lot and don't have time to edit. You need a computer with Python and ffmpeg; no account, key, or paid service is required.</p>
 </div></section>
 
 <section id="oque"><div class="wrap">
   <span class="chip">What it is</span>
-  <h2>Three tedious tasks, handled automatically</h2>
-  <p class="sub">Choosing a segment, building the vertical video, and checking that nothing looks wrong. The kit does all three and leaves the final decision to you.</p>
-  <figure style="margin:0 0 26px;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000"><img src="../assets/banner-grade-en.jpg" alt="Steps: transcribe, find segments, cut to 9:16, add captions, check, you approve" loading="lazy" style="width:100%;display:block"></figure>
+  <h2>Three tedious tasks, handled automatically for you</h2>
+  <p class="sub">Choosing the clip, creating the vertical layout, and checking that nothing went wrong. The kit does all three and leaves the final decision to you.</p>
+  <figure style="margin:0 0 26px;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000"><img src="../assets/banner-grade-en.jpg" alt="Steps: transcribe, find clips, cut to 9:16, add captions, check, you approve" loading="lazy" style="width:100%;display:block"></figure>
   <div class="grid g3">
-    <div class="card"><h3>🔎 Finds the best segments</h3><p>Reads the speech and scores each 20–59 s segment: numbers, "you," a turning point, a question, a conclusion. Flags segments that start mid-sentence, depend on the screen, or say "subscribe."</p></div>
-    <div class="card"><h3>✂️ Cuts to 9:16 with face and screen</h3><p>Finds the webcam automatically. The enlarged face is on top without cutting off the head; the screen is below, following changes on screen. A title at the top and yellow captions highlight each spoken word.</p></div>
+    <div class="card"><h3>🔎 Finds the best clips</h3><p>Reads the speech and scores each 20–59-second clip based on signals like numbers, "you," a turning point, a question, or a conclusion. Flags clips that start mid-sentence, depend on the screen, or include "subscribe."</p></div>
+    <div class="card"><h3>✂️ Creates 9:16 clips with face and screen</h3><p>Finds the webcam automatically. The enlarged face goes on top without cutting off the head; the screen goes below and follows changes on screen. A title appears at the top and yellow captions highlight each spoken word.</p></div>
     <div class="card"><h3>✅ Checks everything; you approve</h3><p>Checks every frame (captions over the face, cut-off head, black screen, frozen image, audio) and the text (complete sentences). A local page shows you everything so you can approve it or ask for it to be redone.</p></div>
   </div>
 </div></section>
 
 <section id="fluxo"><div class="wrap">
   <span class="chip">How it works</span>
-  <h2>One command per step—or one for everything</h2>
-  <p class="sub">Each step saves a file in the episode folder, so you can stop, review, and continue. The <code>tudo</code> shortcut runs the whole sequence.</p>
+  <h2>One command per step—or one command for everything</h2>
+  <p class="sub">Each step saves a file in the episode folder, so you can stop, review, and continue. The <code>tudo</code> shortcut runs the entire sequence.</p>
   <div class="flow">
     <span>novo</span><span class="arr">→</span>
     <span>transcrever</span><span class="arr">→</span>
@@ -173,24 +174,25 @@
     <span>layout</span><span class="arr">→</span>
     <span>render</span><span class="arr">→</span>
     <span>checar</span><span class="arr">→</span>
-    <span>revisão</span><span class="arr">→</span>
+    <span>revisao</span><span class="arr">→</span>
     <span>exportar</span>
   </div>
   <div class="grid g3" style="margin-top:22px">
-    <div class="card"><h3>3 cutting modes</h3><p><b>tela+camera</b> (screen+camera, live stream with webcam in the corner): face on top, screen below. <b>camera</b> (camera, camera podcast): follows the face. <b>tela</b> (screen, no face): screen in the center. The kit chooses automatically.</p></div>
-    <div class="card"><h3>All settings in one file</h3><p>Colors, font, caption size, minimum and maximum duration, and number of shorts per episode are in <code>marca/marca.json</code>. Change them there to update everything.</p></div>
-    <div class="card"><h3>Your feedback becomes a rule</h3><p>Asked for it to be redone? Turn your feedback into a personal rule (starting at R200) with one command, so the same mistake doesn't happen again.</p></div>
+    <div class="card"><h3>3 cutting modes</h3><p><b>tela+camera</b> (screen+camera: live stream with a webcam in the corner): face on top, screen below. <b>camera</b> (camera: camera-only podcast): follows the face. <b>tela</b> (screen: no face): screen centered. The kit chooses automatically.</p></div>
+    <div class="card"><h3>One file for your brand</h3><p>Colors, font, caption size, minimum and maximum duration, and number of shorts per episode are set in <code>marca/marca.json</code>. Change them there and everything updates.</p></div>
+    <div class="card"><h3>Your feedback becomes a rule</h3><p>Asked for a redo? Turn your note into a personal rule (starting at R200) with one command, so the same mistake doesn't happen again.</p></div>
   </div>
 </div></section>
 
 <section id="pre"><div class="wrap">
   <span class="chip">Requirements</span>
   <h2>Python, ffmpeg, and the kit</h2>
-  <p class="sub">Works on Linux and Mac without a graphics card. Local transcription (faster-whisper) is optional: you can also provide a ready-made transcript in JSON.</p>
+  <p class="sub">Works on Linux and Mac, with no graphics card. Local transcription (faster-whisper) is optional: you can also provide a ready-made transcript in JSON.</p>
   <div class="grid g3">
-    <div class="card"><h3>Ubuntu / Debian</h3><p>Python 3.10 or newer and ffmpeg.</p><pre><span class="k">sudo apt install</span> python3-venv ffmpeg git</pre></div>
-    <div class="card"><h3>Mac</h3><p>With Homebrew installed.</p><pre><span class="k">brew install</span> python ffmpeg git</pre></div>
-    <div class="card"><h3>The kit</h3><p>Download it and install the libraries in a separate environment.</p><pre><span class="k">git clone</span> https://github.com/inematds/podcast-em-shorts
+    <div class="card"><h3>Ubuntu / Debian</h3><p>Python 3.10 or newer and ffmpeg. Check the version with <code>python3 --version</code>.</p><pre><span class="k">sudo apt install</span> python3-venv ffmpeg git
+<span class="k">python3 --version</span></pre></div>
+    <div class="card"><h3>Mac</h3><p>With Homebrew installed. On Mac, always use the <code>python3</code> command.</p><pre><span class="k">brew install</span> python ffmpeg git</pre></div>
+    <div class="card"><h3>The kit</h3><p>Download and install the libraries in their own environment (the <code>.venv</code> folder, which keeps the kit's libraries separate from the rest of your computer).</p><pre><span class="k">git clone</span> https://github.com/inematds/podcast-em-shorts
 <span class="k">cd</span> podcast-em-shorts
 <span class="k">python3 -m venv</span> .venv
 <span class="k">.venv/bin/pip install</span> -r requirements.txt faster-whisper</pre></div>
@@ -200,11 +202,11 @@
 <section id="guia"><div class="wrap">
   <span class="chip">User guide · step by step</span>
   <h2>From a long video to approved shorts</h2>
-  <p class="sub">The commands below use <code>.venv/bin/python</code> (the environment created in the requirements section). Replace <code>minha-live</code> with your episode name (lowercase letters, numbers, and hyphens).</p>
+  <p class="sub">The commands below use <code>.venv/bin/python</code> (the environment created in the requirements step). Replace <code>minha-live</code> with your episode name (lowercase letters, numbers, and hyphens). Always enter the folder first: <code>cd podcast-em-shorts</code>. "9:16" is a phone's portrait video (1080×1920).</p>
 
   <div class="step"><div class="b">1</div><div>
     <h3>Check the installation</h3>
-    <p>Shows <code>ok</code> or <code>falta</code> for each component. The first time, it downloads the face detector (YuNet, ~230 KB) and checks its integrity.</p>
+    <p>Shows <code>ok</code> or <code>falta</code> for each component. The first time, it downloads the face detector (YuNet, an open ~230 KB model from OpenCV) and checks its integrity.</p>
 <pre><span class="k">.venv/bin/python pes.py doutor</span></pre>
   </div></div>
 
@@ -216,63 +218,66 @@
 
   <div class="step"><div class="b">3</div><div>
     <h3>Transcribe</h3>
-    <p>With faster-whisper installed, it runs on your computer. Already have a transcript with per-word timestamps (Whisper format)? Import it with <code>--de-json</code>.</p>
+    <p>With faster-whisper installed, transcription runs on your computer. The first time, it downloads the transcription model (the <code>small</code> model is a few hundred MB; <code>tiny</code> is faster, <code>medium</code> is more accurate)—no account and no API. Already have a transcript with word-level timing (the JSON file Whisper generates)? Import it with <code>--de-json</code>.</p>
 <pre><span class="k">.venv/bin/python pes.py transcrever</span> minha-live --modelo small --idioma pt
 <span class="c"># or, with a ready-made transcript:</span>
 <span class="k">.venv/bin/python pes.py transcrever</span> minha-live --de-json <span class="s">transcricao.json</span></pre>
   </div></div>
 
   <div class="step"><div class="b">4</div><div>
-    <h3>Correct names Whisper got wrong</h3>
-    <p>Before cutting, replace incorrect words so the captions are accurate.</p>
+    <h3>Fix names Whisper got wrong</h3>
+    <p>Before cutting, replace misspelled words so the captions are correct. Replacements must match exactly (including capitalization), and you can repeat <code>--trocar</code> as many times as needed.</p>
 <pre><span class="k">.venv/bin/python pes.py corrigir</span> minha-live --trocar <span class="s">"Iá=IA"</span></pre>
   </div></div>
 
   <div class="step"><div class="b">5</div><div>
-    <h3>Review the candidates and choose</h3>
-    <p>Lists segments with scores, signals, and alerts. Choose by code (c01, c03…) and give each one a short title. Found a better segment while reading the transcript? Use <code>manual</code> with the first and last word numbers.</p>
+    <h3>Review candidates and choose</h3>
+    <p>Lists clips with their scores, signals, and warnings. Choose by code (c01, c03…) and give each one a short title. Found a better clip? The <code>palavras</code> command shows the transcript with word numbers (search with <code>--busca</code>); use those numbers with <code>manual</code>.</p>
 <pre><span class="k">.venv/bin/python pes.py candidatos</span> minha-live --top 12
 <span class="k">.venv/bin/python pes.py escolher</span> minha-live c01,c03 --titulo <span class="s">"s1=O pedido que a IA acerta"</span> --titulo <span class="s">"s2=Seja o maestro dos agentes"</span>
-<span class="c"># segment chosen manually (words 1239 to 1315):</span>
+<span class="c"># manually selected clip: find the numbers and choose</span>
+<span class="k">.venv/bin/python pes.py palavras</span> minha-live --busca <span class="s">"paraíso"</span>
 <span class="k">.venv/bin/python pes.py escolher</span> minha-live manual --ajustar s1=1239:1315 --titulo <span class="s">"s1=A IA te dá tudo. E a liberdade?"</span></pre>
   </div></div>
 
   <div class="step"><div class="b">6</div><div>
-    <h3>Build the shorts</h3>
-    <p><code>layout</code> detects the webcam and screen; <code>render</code> creates <code>clips/s1.mp4</code>, <code>s2.mp4</code>… in 1080×1920.</p>
+    <h3>Create the shorts</h3>
+    <p><code>layout</code> detects where the webcam and screen are; <code>render</code> creates <code>clips/s1.mp4</code>, <code>s2.mp4</code>… at 1080×1920.</p>
 <pre><span class="k">.venv/bin/python pes.py layout</span> minha-live
 <span class="k">.venv/bin/python pes.py render</span> minha-live --todos</pre>
   </div></div>
 
   <div class="step"><div class="b">7</div><div>
     <h3>Run the checks</h3>
-    <p>Each one ends with <code>OK</code> or <code>FALHOU: motivo</code>. Failed? Choose another segment or adjust the cut—don't hide the failure.</p>
+    <p>Each ends with <code>QUADROS OK</code> / <code>CONTEUDO OK</code> or <code>FALHOU: motivo</code>. Common reasons: <code>rosto_legenda</code> (caption touches the face), <code>cabeca_cortada</code>, <code>inicio_meio</code>, or <code>sem_muleta</code> (the clip starts mid-sentence or with "então/né"). Did it fail? Choose another clip or adjust the start and end—don't hide the failure. The complete rules are in <code>regras/REGRAS.md</code>.</p>
 <pre><span class="k">.venv/bin/python pes.py checar-quadros</span> episodios/minha-live/clips/s1.mp4 --legendas episodios/minha-live/clips/s1.legendas.json
 <span class="k">.venv/bin/python pes.py checar-conteudo</span> minha-live s1</pre>
   </div></div>
 
   <div class="step"><div class="b">8</div><div>
     <h3>Review and approve</h3>
-    <p>Opens a page on your computer with each short, its checks, a notes field, and the <b>Aprovar</b> (approve) and <b>Refazer</b> (redo) buttons. Your decision is saved in <code>revisao.json</code>.</p>
-<pre><span class="k">.venv/bin/python pes.py revisao</span> minha-live   <span class="c"># open the address shown (http://127.0.0.1:…)</span></pre>
+    <p>Opens a page on your computer with each short, its checks, a notes field, and the <b>Aprovar</b> (approve) and <b>Refazer</b> (redo) buttons. The decision is saved in <code>revisao.json</code>.</p>
+<pre><span class="k">.venv/bin/python pes.py revisao</span> minha-live   <span class="c"># open the address shown (http://127.0.0.1:…)</span>
+<span class="c"># to open it on your phone on the same Wi-Fi network:</span>
+<span class="k">.venv/bin/python pes.py revisao</span> minha-live --host 0.0.0.0   <span class="c"># on your phone: http://IP-deste-computador:porta</span></pre>
   </div></div>
 
   <div class="step"><div class="b">9</div><div>
-    <h3>Set aside the approved shorts</h3>
-    <p>Copies only the approved shorts to <code>aprovados/</code>, along with supporting text (title and speech) for you to post wherever you like. The kit doesn't post anything.</p>
+    <h3>Gather the approved shorts</h3>
+    <p>Copies only the approved shorts to <code>aprovados/</code>, with supporting text (title and speech) for you to post wherever you like. The kit doesn't post anything.</p>
 <pre><span class="k">.venv/bin/python pes.py exportar</span> minha-live</pre>
   </div></div>
 
   <div class="step"><div class="b">10</div><div>
-    <h3>Turn your feedback into a rule</h3>
-    <p>The short's latest note becomes one of your rules in <code>regras/MINHAS-REGRAS.md</code> (R200, R201…).</p>
+    <h3>Turn your note into a rule</h3>
+    <p>The short's latest note becomes your rule in <code>regras/MINHAS-REGRAS.md</code>. The kit's rules run from R1 to R32; yours start at R200.</p>
 <pre><span class="k">.venv/bin/python pes.py regra</span> --da-nota minha-live s1
 <span class="k">.venv/bin/python pes.py regra</span> <span class="s">"Título com no máximo 5 palavras"</span> --quem conteudo</pre>
   </div></div>
 
   <div class="step"><div class="b">⚡</div><div>
-    <h3>Shortcut: everything at once</h3>
-    <p>Transcribes (or imports), picks the best candidates without alerts, cuts, checks, and shows the review command. Never approves anything automatically.</p>
+    <h3>Shortcut: do everything at once</h3>
+    <p>After step 2 (<code>novo</code>), one command transcribes (or imports), picks the best clips without warnings, cuts and checks them, and shows the review command. It never approves anything on its own, and the automatic title is the start of the speech: use <code>escolher</code> to replace it with your own title before posting.</p>
 <pre><span class="k">.venv/bin/python pes.py tudo</span> minha-live --modelo small --idioma pt
 <span class="c"># or with a ready-made transcript:</span>
 <span class="k">.venv/bin/python pes.py tudo</span> minha-live --de-json <span class="s">transcricao.json</span></pre>
@@ -280,7 +285,7 @@
 
   <div class="step"><div class="b">🤖</div><div>
     <h3>With Claude Code or Codex</h3>
-    <p>The kit includes a skill with the step order and guidance on when to stop. Copy the folder into your agent's skills directory and ask, "make shorts from my live stream." Without an agent, follow the steps above manually.</p>
+    <p>The kit includes a skill (an instruction file the agent reads) with the step order and when to stop. Copy the folder into your agent's skills folder and ask, "make shorts from my live stream." Without an agent, follow the steps above manually.</p>
 <pre><span class="k">mkdir -p</span> ~/.claude/skills <span class="k">&amp;&amp; cp -r</span> skill/podcast-em-shorts ~/.claude/skills/
 <span class="c"># Codex: read skill/podcast-em-shorts/SKILL.md at the start of the conversation</span></pre>
   </div></div>
@@ -289,35 +294,35 @@
 <section id="exemplos"><div class="wrap">
   <span class="chip">Examples</span>
   <h2>Three shorts from a 57-minute live stream</h2>
-  <p class="sub">The "IA Superinteligente" (Superintelligent AI) live stream, with screen sharing and a webcam in the corner. Transcript: 6,443 words. All three pass the frame and content checks. With the transcript ready, the <code>tudo</code> shortcut took 1 min 20 s from video to three checked shorts, with the machine otherwise idle.</p>
+  <p class="sub">“AI Superintelligence” live stream, with screen sharing and a webcam in the corner. Transcript: 6,443 words. All three pass the frame and content checks. With the transcript ready, the <code>tudo</code> shortcut took 1 minute 20 seconds from video to three checked shorts, while the computer was otherwise idle.</p>
   <div class="shorts">
-    <figure><video controls preload="none" playsinline poster="../assets/ex-s1.jpg" src="../../exemplos/live-s1.mp4"></video><figcaption><b>A IA te dá tudo. E a liberdade?</b> (AI gives you everything. What about freedom?) · 33 s · segment chosen manually, "Iá" corrected to "IA"</figcaption></figure>
-    <figure><video controls preload="none" playsinline poster="../assets/ex-s2.jpg" src="../../exemplos/live-s2.mp4"></video><figcaption><b>Seja o maestro dos agentes</b> (Be the conductor of the agents) · 26 s · complete idea, from problem to conclusion</figcaption></figure>
-    <figure><video controls preload="none" playsinline poster="../assets/ex-s3.jpg" src="../../exemplos/live-s3.mp4"></video><figcaption><b>O pedido que a IA acerta</b> (The request the AI gets right) · 35 s · practical advice that makes sense on its own</figcaption></figure>
+    <figure><video controls preload="none" playsinline poster="../assets/ex-s1.jpg" src="../../exemplos/live-s1.mp4"></video><figcaption><b>A IA te dá tudo. E a liberdade? (AI gives you everything. What about freedom?)</b> · 33 s · manually selected clip, "Iá" corrected to "IA"</figcaption></figure>
+    <figure><video controls preload="none" playsinline poster="../assets/ex-s2.jpg" src="../../exemplos/live-s2.mp4"></video><figcaption><b>Seja o maestro dos agentes (Be the conductor of the agents)</b> · 26 s · complete idea, from problem to conclusion</figcaption></figure>
+    <figure><video controls preload="none" playsinline poster="../assets/ex-s3.jpg" src="../../exemplos/live-s3.mp4"></video><figcaption><b>O pedido que a IA acerta (The request AI gets right)</b> · 35 s · practical advice that makes sense on its own</figcaption></figure>
   </div>
   <div class="ex" style="margin-top:22px">
-    <figure><img src="../assets/revisao-desk.jpg" alt="Review page on a computer" loading="lazy"><figcaption>Review page: video, checks, notes, Aprovar (approve), and Refazer (redo).</figcaption></figure>
-    <figure><img src="../assets/revisao-cel.jpg" alt="Review page on a phone" loading="lazy" style="max-width:300px;margin:0 auto"><figcaption>The same page on a phone, on your local network.</figcaption></figure>
+    <figure><img src="../assets/revisao-desk.jpg" alt="Review page on a computer" loading="lazy"><figcaption>Review page: video, checks, note, Aprovar (approve), and Refazer (redo).</figcaption></figure>
+    <figure><img src="../assets/revisao-cel.jpg" alt="Review page on a phone" loading="lazy" style="max-width:300px;margin:0 auto"><figcaption>The same page on a phone (with <code>--host 0.0.0.0</code>, on the same Wi-Fi network).</figcaption></figure>
   </div>
   <div class="grid g2" style="margin-top:22px">
-    <div class="card"><h3>What the checks caught</h3><p>While building these examples, the checks rejected a segment that began with "Então," ("So,") and a case where a hand pointing toward the face was detected as a second face. We replaced the first segment; the second led to a detector fix, with a test.</p></div>
-    <div class="card"><h3>What a human eye caught</h3><p>Reviewing frame by frame, we found a second head cut off at the top when the head touched the edge of the webcam frame. This became a rule: the crop never leaves the webcam frame. That's why human review is still required.</p></div>
+    <div class="card"><h3>What the checks caught</h3><p>While creating these examples, the checks rejected a clip that started with "Então," and a case where a pointing hand was mistaken for a second face. We replaced the first clip; the second led to a tested fix in the detector.</p></div>
+    <div class="card"><h3>What the human eye caught</h3><p>Reviewing frame by frame, we found a second head cut off at the top when it touched the edge of the webcam frame. This became a rule: the crop must always stay within the webcam window. That's why human review remains mandatory.</p></div>
   </div>
 </div></section>
 
 <section id="roadmap"><div class="wrap">
   <span class="chip">Roadmap</span>
   <h2>What exists and what's next</h2>
-  <p class="sub">The current version covers the full workflow for a single-person episode.</p>
+  <p class="sub">The current version covers the complete workflow for a single-person episode.</p>
   <div class="phase"><div class="tag">Ready</div><div class="d"><strong>Episode → shorts ready for review</strong><span>Local or imported transcript, scored candidates, 3 cutting modes, word-by-word captions, frame and text checks, review page, export, and personal rules. 36 automated tests.</span></div></div>
-  <div class="phase"><div class="tag">Next</div><div class="d"><strong>Two people in the conversation</strong><span>Switch between the faces of the speakers in podcasts with two cameras.</span></div></div>
-  <div class="phase"><div class="tag">Later</div><div class="d"><strong>Graphics for each segment</strong><span>An animated card when the speech includes a number or comparison.</span></div></div>
+  <div class="phase"><div class="tag">Next</div><div class="d"><strong>Two people in the conversation</strong><span>Switch between the speakers' faces in two-camera podcasts.</span></div></div>
+  <div class="phase"><div class="tag">Later</div><div class="d"><strong>Graphic for each clip</strong><span>An animated card when the speech includes a number or comparison.</span></div></div>
 </div></section>
 
 <footer>
   <div class="wrap">
     <div class="pill">Python</div><div class="pill">ffmpeg</div><div class="pill">OpenCV YuNet</div><div class="pill">faster-whisper</div>
-    <p style="margin-top:18px">podcast-em-shorts · free, open toolkit ·
+    <p style="margin-top:18px">podcast-em-shorts · free open kit ·
       <a href="https://github.com/inematds/podcast-em-shorts">inematds/podcast-em-shorts</a> ·
       <a href="https://inema.club">INEMA.CLUB</a></p>
   </div>
