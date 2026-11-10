@@ -1,0 +1,51 @@
+{
+  "duracao_video": 29.78,
+  "renders": [
+    {
+      "segundos": 5.464,
+      "sha256": "45d9ea6d7135f236bca33b1940f36fc586e3bc042ab21ee38fd0ef8861aa3b24"
+    },
+    {
+      "segundos": 5.047,
+      "sha256": "45d9ea6d7135f236bca33b1940f36fc586e3bc042ab21ee38fd0ef8861aa3b24"
+    }
+  ],
+  "deterministico": true,
+  "quadros": {
+    "ok": true,
+    "itens": {
+      "resolucao": {
+        "ok": true,
+        "detalhe": "1080x1920; esperado 1080x1920"
+      },
+      "audio": {
+        "ok": true,
+        "detalhe": "Volume médio -12.4 dB; mínimo exclusivo -50 dB"
+      },
+      "area_segura": {
+        "ok": true,
+        "detalhe": "0 caixas fora da área segura"
+      },
+      "preto": {
+        "ok": true,
+        "detalhe": "Maior trecho quase preto: 0.00s"
+      },
+      "congelado": {
+        "ok": true,
+        "detalhe": "Maior trecho sem mudança: 0.00s"
+      },
+      "rosto_legenda": {
+        "ok": true,
+        "detalhe": "0 colisões; 61 rostos em 60 amostras; tempos []"
+      },
+      "cabeca_cortada": {
+        "ok": true,
+        "detalhe": "0 rostos junto à borda; tempos []"
+      }
+    }
+  },
+  "outros_layouts": {
+    "tela": "quadros e conteúdo OK com vídeo sintético de movimento e áudio",
+    "camera": "render e cabeça inteira OK; YuNet confundiu mão com rosto em 16,0 s; rosto_legenda reprovado"
+  }
+}

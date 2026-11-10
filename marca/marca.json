@@ -1,0 +1,29 @@
+{
+  "nome": "INEMA.CLUB",
+  "arroba": "@inema.club",
+  "cores": {
+    "fundo": "#0c0c10",
+    "texto": "#FFFFFF",
+    "destaque": "#FACC15",
+    "contorno": "#000000"
+  },
+  "fonte": "marca/fontes/Montserrat-Black.ttf",
+  "legenda": {
+    "max_palavras": 3,
+    "max_caracteres": 22,
+    "tamanho": 72,
+    "contorno": 8
+  },
+  "duracao": {
+    "min": 20,
+    "max": 59
+  },
+  "shorts_por_episodio": 3,
+  "area_segura": {
+    "topo": 0.006,
+    "base": 0.2,
+    "lados": 0.06
+  },
+  "titulo_segundos": 3.0,
+  "tela_modo": "auto"
+}

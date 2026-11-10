@@ -1,0 +1,194 @@
+test_doutor (test_pes.T00Doutor.test_doutor) ... ok
+test_a_novo_recusa_repetido (test_pes.T01Fluxo.test_a_novo_recusa_repetido) ... /home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:87: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/pes-teste-mdn0jdg2/episodios/live30/ep.json' mode='r' encoding='UTF-8'>
+  ep = json.load(open(os.path.join(self.epdir, "ep.json")))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_b_palavras (test_pes.T01Fluxo.test_b_palavras) ... /home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:92: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/pes-teste-mdn0jdg2/episodios/live30/work/palavras.json' mode='r' encoding='UTF-8'>
+  pal = json.load(open(os.path.join(self.epdir, "work", "palavras.json")))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:93: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/tests/fixtures/live30-segmentos.json' mode='r' encoding='UTF-8'>
+  segs = json.load(open(SEGS))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_c_candidatos (test_pes.T01Fluxo.test_c_candidatos) ... /home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:106: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/pes-teste-mdn0jdg2/episodios/live30/work/palavras.json' mode='r' encoding='UTF-8'>
+  pal = json.load(open(os.path.join(self.epdir, "work", "palavras.json")))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_d_layout_tela_camera (test_pes.T01Fluxo.test_d_layout_tela_camera) ... ok
+test_e_render_e_checagens (test_pes.T01Fluxo.test_e_render_e_checagens) ... /home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:132: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/pes-teste-mdn0jdg2/episodios/live30/clips.json' mode='r' encoding='UTF-8'>
+  clips = json.load(open(os.path.join(self.epdir, "clips.json")))["clips"]
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:142: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/pes-teste-mdn0jdg2/episodios/live30/clips/s1.legendas.json' mode='r' encoding='UTF-8'>
+  leg = json.load(open(os.path.join(self.epdir, "clips", "s1.legendas.json")))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:163: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/pes-teste-mdn0jdg2/episodios/live30/clips/ruim.legendas.json' mode='w' encoding='UTF-8'>
+  json.dump(ruim, open(ruim_path, "w"))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_f_revisao_e_exportar (test_pes.T01Fluxo.test_f_revisao_e_exportar) ... /home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:193: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/pes-teste-mdn0jdg2/episodios/live30/revisao.json' mode='r' encoding='UTF-8'>
+  est = json.load(open(os.path.join(self.epdir, "revisao.json")))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/lib/python3.12/unittest/case.py:589: ResourceWarning: unclosed file <_io.TextIOWrapper name=3 encoding='UTF-8'>
+  if method() is not None:
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/lib/python3.12/unittest/case.py:589: ResourceWarning: unclosed file <_io.TextIOWrapper name=5 encoding='UTF-8'>
+  if method() is not None:
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_checar_conteudo_meio_da_frase (test_pes.T02Candidatos.test_checar_conteudo_meio_da_frase) ... /home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:214: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/pes-teste-agw5fz6z/episodios/sint/ep.json' mode='w' encoding='UTF-8'>
+  json.dump({"ep": "sint", "video": "raw/video.mp4", "duracao": 400, "largura": 1920, "altura": 1080, "fps": 30},
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:234: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/pes-teste-agw5fz6z/episodios/sint/work/palavras.json' mode='w' encoding='UTF-8'>
+  json.dump(pal, open(os.path.join(ep, "work", "palavras.json"), "w"))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:262: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/pes-teste-agw5fz6z/episodios/sint/clips.json' mode='w' encoding='UTF-8'>
+  json.dump({"clips": [clip, bom]}, open(os.path.join(ep, "clips.json"), "w"))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_melhor_trecho_e_alertas (test_pes.T02Candidatos.test_melhor_trecho_e_alertas) ... /home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:214: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/pes-teste-ewe0jqw7/episodios/sint/ep.json' mode='w' encoding='UTF-8'>
+  json.dump({"ep": "sint", "video": "raw/video.mp4", "duracao": 400, "largura": 1920, "altura": 1080, "fps": 30},
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:234: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/pes-teste-ewe0jqw7/episodios/sint/work/palavras.json' mode='w' encoding='UTF-8'>
+  json.dump(pal, open(os.path.join(ep, "work", "palavras.json"), "w"))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_bom (test_pes.T03Gancho.test_bom) ... ok
+test_ruim (test_pes.T03Gancho.test_ruim) ... ok
+test_preto_silencio_e_resolucao (test_pes.T04QuadrosSinteticos.test_preto_silencio_e_resolucao) ... ok
+test_numeracao_r200 (test_pes.T05Regras.test_numeracao_r200) ... /home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:317: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/pes-teste-out26p1h/regras/MINHAS-REGRAS.md' mode='r' encoding='UTF-8'>
+  txt = open(os.path.join(raiz, "regras", "MINHAS-REGRAS.md")).read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_codigo_nao_publica (test_pes.T06SemRede.test_codigo_nao_publica) ... /home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:330: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes/tudo.py' mode='r' encoding='utf-8'>
+  t = open(os.path.join(raiz, a), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:330: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes/layout.py' mode='r' encoding='utf-8'>
+  t = open(os.path.join(raiz, a), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:330: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes/tela.py' mode='r' encoding='utf-8'>
+  t = open(os.path.join(raiz, a), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:330: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes/conteudo.py' mode='r' encoding='utf-8'>
+  t = open(os.path.join(raiz, a), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:330: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes/gancho.py' mode='r' encoding='utf-8'>
+  t = open(os.path.join(raiz, a), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:330: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes/legenda.py' mode='r' encoding='utf-8'>
+  t = open(os.path.join(raiz, a), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:330: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes/doutor.py' mode='r' encoding='utf-8'>
+  t = open(os.path.join(raiz, a), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:330: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes/rostos.py' mode='r' encoding='utf-8'>
+  t = open(os.path.join(raiz, a), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:330: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes/transcrever.py' mode='r' encoding='utf-8'>
+  t = open(os.path.join(raiz, a), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:330: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes/escolher.py' mode='r' encoding='utf-8'>
+  t = open(os.path.join(raiz, a), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:330: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes/exportar.py' mode='r' encoding='utf-8'>
+  t = open(os.path.join(raiz, a), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:330: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes/regras.py' mode='r' encoding='utf-8'>
+  t = open(os.path.join(raiz, a), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:330: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes/util.py' mode='r' encoding='utf-8'>
+  t = open(os.path.join(raiz, a), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:330: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes/__init__.py' mode='r' encoding='utf-8'>
+  t = open(os.path.join(raiz, a), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:330: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes/render.py' mode='r' encoding='utf-8'>
+  t = open(os.path.join(raiz, a), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:330: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes/quadros.py' mode='r' encoding='utf-8'>
+  t = open(os.path.join(raiz, a), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:330: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes/novo.py' mode='r' encoding='utf-8'>
+  t = open(os.path.join(raiz, a), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:330: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes/revisao.py' mode='r' encoding='utf-8'>
+  t = open(os.path.join(raiz, a), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:330: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes/candidatos.py' mode='r' encoding='utf-8'>
+  t = open(os.path.join(raiz, a), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:333: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes.py' mode='r' encoding='utf-8'>
+  t = open(PES, encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_marca_sem_cor_fixa_no_codigo (test_pes.T06SemRede.test_marca_sem_cor_fixa_no_codigo) ... /home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:342: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes/tudo.py' mode='r' encoding='utf-8'>
+  t = open(os.path.join(raiz, a), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:342: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes/layout.py' mode='r' encoding='utf-8'>
+  t = open(os.path.join(raiz, a), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:342: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes/tela.py' mode='r' encoding='utf-8'>
+  t = open(os.path.join(raiz, a), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:342: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes/conteudo.py' mode='r' encoding='utf-8'>
+  t = open(os.path.join(raiz, a), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:342: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes/gancho.py' mode='r' encoding='utf-8'>
+  t = open(os.path.join(raiz, a), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:342: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes/legenda.py' mode='r' encoding='utf-8'>
+  t = open(os.path.join(raiz, a), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:342: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes/doutor.py' mode='r' encoding='utf-8'>
+  t = open(os.path.join(raiz, a), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:342: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes/rostos.py' mode='r' encoding='utf-8'>
+  t = open(os.path.join(raiz, a), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:342: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes/transcrever.py' mode='r' encoding='utf-8'>
+  t = open(os.path.join(raiz, a), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:342: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes/escolher.py' mode='r' encoding='utf-8'>
+  t = open(os.path.join(raiz, a), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:342: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes/exportar.py' mode='r' encoding='utf-8'>
+  t = open(os.path.join(raiz, a), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:342: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes/regras.py' mode='r' encoding='utf-8'>
+  t = open(os.path.join(raiz, a), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:342: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes/util.py' mode='r' encoding='utf-8'>
+  t = open(os.path.join(raiz, a), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:342: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes/__init__.py' mode='r' encoding='utf-8'>
+  t = open(os.path.join(raiz, a), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:342: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes/render.py' mode='r' encoding='utf-8'>
+  t = open(os.path.join(raiz, a), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:342: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes/quadros.py' mode='r' encoding='utf-8'>
+  t = open(os.path.join(raiz, a), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:342: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes/novo.py' mode='r' encoding='utf-8'>
+  t = open(os.path.join(raiz, a), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:342: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes/revisao.py' mode='r' encoding='utf-8'>
+  t = open(os.path.join(raiz, a), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_pes.py:342: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/nmaldaner/projetos/podcast-em-shorts/pes/candidatos.py' mode='r' encoding='utf-8'>
+  t = open(os.path.join(raiz, a), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+/home/nmaldaner/projetos/podcast-em-shorts/tests/test_visual.py:37: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/pes-teste-7d9eyi1b/episodios/v/clips/s1.legendas.json' mode='r' encoding='UTF-8'>
+  cls.leg = json.load(open(os.path.join(d, "s1.legendas.json")))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+test_checagem_passa (test_visual.TVisual.test_checagem_passa) ... ok
+test_legenda_tamanho (test_visual.TVisual.test_legenda_tamanho) ... ok
+test_rosto_grande_e_inteiro_em_cima (test_visual.TVisual.test_rosto_grande_e_inteiro_em_cima) ... ok
+test_tela_preenche_metade_de_baixo (test_visual.TVisual.test_tela_preenche_metade_de_baixo) ... ok
+test_titulo_grande (test_visual.TVisual.test_titulo_grande) ... ok
+test_webcam_preenche_metade_de_cima (test_visual.TVisual.test_webcam_preenche_metade_de_cima) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 31.401s
+
+OK

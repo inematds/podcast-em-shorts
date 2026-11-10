@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "itens": {
+    "inicio_frase": true,
+    "sem_muleta": true,
+    "fechamento": true,
+    "sem_chamada": true,
+    "duracao": true,
+    "continuo": true
+  }
+}
