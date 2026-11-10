@@ -1,4 +1,5 @@
 """Blocos em uma linha, geometria medida e karaokê ASS por palavra."""
+import math
 from PIL import ImageFont
 from .util import cruzam
 
@@ -104,8 +105,8 @@ def criar(pal, c, lay, rosto, m, raiz, destino):
             evento(s, e, ' '.join(partes), caixa, tam)
     linhas, tam = titulo_linhas(c['titulo'], m, raiz)
     f_titulo = fonte(m, raiz, tam)
-    passo = max(f_titulo.getbbox(t)[3]-f_titulo.getbbox(t)[1] for t in linhas) + 24
-    y = 12 if lay == 'tela+camera' else 192
+    passo = max(f_titulo.getbbox(t)[3]-f_titulo.getbbox(t)[1] for t in linhas) + 8
+    y = math.ceil(1920 * m['area_segura']['topo'])
     medidas = [medir(t, m, raiz, tam, y+i*passo, largura_util)[1]
                for i, t in enumerate(linhas)]
     caixa = [min(b[0] for b in medidas), y, max(b[2] for b in medidas), passo*len(linhas)]

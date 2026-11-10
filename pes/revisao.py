@@ -6,8 +6,10 @@ import re
 import threading
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from subprocess import TimeoutExpired
 from urllib.parse import urlsplit
 from .util import episodio, clips, ler, salvar, marca
+from .miniatura import gerar as gerar_miniatura
 
 
 def pagina(a, estatico=False):
@@ -32,8 +34,11 @@ def pagina(a, estatico=False):
         st = estado.get(identificador, {})
         notas = ''.join('<li>' + esc(n['texto']) + '</li>' for n in st.get('notas', []))
         video = ('clips/' if estatico else '/video/') + identificador + '.mp4'
+        poster = video.removesuffix('.mp4') + '.jpg'
+        oculto = 'hidden' if (pasta / 'clips' / (identificador + '.mp4')).is_file() else ''
         desabilitado = 'disabled' if estatico else ''
-        secoes.append(f'''<article id="{identificador}"><video controls preload="metadata" playsinline src="{video}" aria-label="Vídeo {identificador}"></video>
+        secoes.append(f'''<article id="{identificador}"><div class="midia"><video controls preload="metadata" playsinline src="{video}" poster="{poster}" aria-label="Vídeo {identificador}" onerror="this.nextElementSibling.hidden=false"></video>
+<p class="erro-video" role="status" {oculto}>vídeo não encontrado: clips/{identificador}.mp4</p></div>
 <div class="decisao"><h2>{esc(c['titulo'])}</h2><p>{identificador} · {c['e']-c['s']:.1f} s · Nota do candidato: {nota}</p>
 <ul class="checagens">{''.join(testes)}</ul><p class="status" role="status">{esc(st.get('status', 'Aguardando revisão'))}</p>
 <label for="nota-{identificador}">O que ficou bom ou precisa mudar?</label><textarea id="nota-{identificador}" rows="3" maxlength="4000"></textarea>
@@ -42,12 +47,12 @@ def pagina(a, estatico=False):
     css = '''*{box-sizing:border-box}body{margin:0;background:var(--fundo);color:var(--texto);font-family:var(--fonte),sans-serif;line-height:1.6}
 main{max-width:1080px;margin:auto;padding:40px 24px}h1{font-size:clamp(1.8rem,4vw,2.7rem);line-height:1.15}h2{font-size:1.5rem;line-height:1.3}
 article{display:grid;grid-template-columns:minmax(220px,340px) minmax(0,1fr);gap:40px;padding:40px 0;border-top:1px solid var(--texto)}
-video{width:100%;max-height:74vh;background:var(--contorno)}p{max-width:65ch}.decisao{min-width:0}.checagens{padding-left:20px}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:.85rem}
+.midia{width:100%;max-width:340px;align-self:start}video{display:block;width:100%;height:auto;aspect-ratio:9/16;object-fit:contain;background:var(--contorno)}.erro-video{overflow-wrap:anywhere}p{max-width:65ch}.decisao{min-width:0}.checagens{padding-left:20px}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:.85rem}
 label{display:block;margin-top:24px}textarea{display:block;width:100%;padding:12px;background:var(--fundo);color:var(--texto);border:1px solid var(--texto);font:inherit}
 .acoes{display:flex;gap:12px;margin:16px 0 24px}button{padding:12px 24px;min-height:48px;font:inherit;cursor:pointer;border:1px solid var(--texto);color:var(--texto);background:var(--fundo)}
 button[data-acao=aprovar]{background:var(--destaque);color:var(--contorno);border-color:var(--destaque)}button:hover{filter:brightness(.85)}button:disabled{opacity:.5;cursor:wait}
 :focus-visible{outline:3px solid var(--destaque);outline-offset:4px}.status{color:var(--destaque)}summary{cursor:pointer}details{margin-top:12px}
-@media(max-width:640px){main{padding:24px 16px}article{grid-template-columns:1fr;gap:16px}video{max-height:65vh}.acoes button{flex:1;padding:12px}}'''
+@media(max-width:640px){main{padding:24px 16px}article{grid-template-columns:1fr;gap:16px}.midia{max-width:360px;margin-inline:auto}.acoes button{flex:1;padding:12px}}'''
     cores = ';'.join('--' + k + ':' + v for k, v in m['cores'].items())
     css = ':root{' + cores + ';--fonte:RevisaoMarca}' + css
     fonte_url = 'revisao-fonte.ttf' if estatico else '/fonte.ttf'
@@ -70,6 +75,11 @@ def rodar(a):
     lista = {c['id'] for c in clips(a)}
     if any(not re.fullmatch(r'[a-zA-Z0-9-]+', c) for c in lista):
         raise ValueError('Identificador de clip inválido.')
+    for identificador in sorted(lista):
+        try:
+            gerar_miniatura(pasta / 'clips' / (identificador + '.mp4'))
+        except (OSError, RuntimeError, TimeoutExpired) as exc:
+            print('Miniatura indisponível:', exc, flush=True)
     if a.so_html:
         import shutil
         from .util import raiz
@@ -102,12 +112,13 @@ def rodar(a):
             if url == '/fonte.ttf':
                 from .util import raiz
                 return self.responder(200, (raiz(a) / marca(a)['fonte']).read_bytes(), 'font/ttf')
-            nome = url.removeprefix('/video/').removesuffix('.mp4')
-            if url != '/video/' + nome + '.mp4' or nome not in lista:
+            extensao = '.jpg' if url.endswith('.jpg') else '.mp4'
+            nome = url.removeprefix('/video/').removesuffix(extensao)
+            if url != '/video/' + nome + extensao or nome not in lista:
                 return self.responder(404, 'Arquivo não encontrado.', 'text/plain; charset=utf-8')
-            caminho = pasta / 'clips' / (nome + '.mp4')
+            caminho = pasta / 'clips' / (nome + extensao)
             if not caminho.exists():
-                return self.responder(404, 'Vídeo ainda não renderizado.', 'text/plain; charset=utf-8')
+                return self.responder(404, 'vídeo não encontrado: ' + caminho.name, 'text/plain; charset=utf-8')
             total = caminho.stat().st_size
             inicio, fim, status = 0, total - 1, 200
             pedido_range = self.headers.get('Range')

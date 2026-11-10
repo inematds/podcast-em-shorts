@@ -7,7 +7,7 @@ from pathlib import Path
 import cv2
 import numpy as np
 from .rostos import Detector, proteger_cabeca
-from .util import ffprobe, ler, marca, cruzam, salvar
+from .util import ffprobe, ler, marca, cruzam, salvar, raiz
 
 
 def verificar(a):
@@ -106,8 +106,16 @@ def verificar(a):
 
 def rodar(a):
     resultado = verificar(a)
-    # Relatório acompanha o vídeo, sem depender de o episódio estar na raiz padrão.
-    salvar(Path(a.mp4).with_suffix('.quadros.json'), resultado)
+    destino = getattr(a, 'salvar', None)
+    if destino is None:
+        video = Path(a.mp4).resolve()
+        episodios = raiz(a) / 'episodios'
+        if video.is_relative_to(episodios):
+            relativo = video.relative_to(episodios)
+            if len(relativo.parts) >= 2 and (episodios / relativo.parts[0] / 'ep.json').is_file():
+                destino = video.with_suffix('.quadros.json')
+    if destino is not None:
+        salvar(destino, resultado)
     if a.json:
         print(json.dumps(resultado, ensure_ascii=False))
     else:

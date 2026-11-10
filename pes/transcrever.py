@@ -1,5 +1,7 @@
 """Importa palavras temporizadas ou transcreve com motor local opcional."""
 import math
+import subprocess
+import numpy as np
 from .util import episodio, ler, salvar
 
 
@@ -53,7 +55,15 @@ def rodar(a):
             print('Falta faster-whisper: pip install faster-whisper; ou use --de-json arquivo.json.')
             return 2
         motor = WhisperModel(a.modelo, device='cpu', compute_type='int8')
-        segs, _ = motor.transcribe(str(pasta / 'raw/video.mp4'), language=a.idioma,
+        # Entregar amostras evita decode_audio/PyAV e suas incompatibilidades.
+        audio = subprocess.run(
+            ['ffmpeg', '-v', 'error', '-nostdin', '-i', str(pasta / 'raw/video.mp4'),
+             '-vn', '-ac', '1', '-ar', '16000', '-f', 'f32le', '-acodec', 'pcm_f32le', 'pipe:1'],
+            capture_output=True, check=True, timeout=600)
+        amostras = np.frombuffer(audio.stdout, dtype='<f4').copy()
+        if not amostras.size or not np.isfinite(amostras).all():
+            raise ValueError('Áudio vazio ou inválido após extração com ffmpeg.')
+        segs, _ = motor.transcribe(amostras, language=a.idioma,
                                   word_timestamps=True)
         segmentos = [{'words': [{'word': w.word, 'start': w.start, 'end': w.end}
                                 for w in (s.words or [])]} for s in segs]

@@ -82,6 +82,14 @@ Quem checa: seleção de candidatos, pela interseção temporal.
 Por quê: ampliar só a face perde cabelo, testa e contexto da expressão.
 Quem checa: render preenche 1080×960 com recorte interno de cerca de 3%,
 face com pelo menos 300 px, cabeça e ombros visíveis; quadros e pessoa revisora.
+Todo recorte deve ficar dentro dos quatro lados de `camera`, inclusive após
+arredondar. Se faltar espaço acima da cabeça, encostar no topo da webcam
+ou reduzir o zoom. Não repetir, espelhar ou esticar faixas da imagem para
+inventar espaço. Áreas descobertas recebem a webcam inteira desfocada e
+escurecida, preservando a proporção da pessoa. Registrar em `recortes_camera`
+do `<id>.legendas.json` o tempo relativo ao clip e a caixa `[x,y,w,h]` em
+pixels da origem, por mudança de recorte (uma entrada em t=0 se for fixo).
+A checagem `cabeca_cortada` permanece integral, mesmo no limite da origem.
 
 ## R19 — Detecte rostos de verdade
 Por quê: a posição prevista no layout não comprova onde a pessoa está em cada quadro.
@@ -92,7 +100,9 @@ Por quê: legenda ou título sobre a face atrapalham expressão e leitura.
 Quem checa: quadros, com margem de 4% da altura e extensão superior de 25% da face.
 Título Montserrat Black de pelo menos 80 px, até duas linhas, acima da testa,
 com fundo semitransparente e palavra forte em destaque durante `titulo_segundos`.
-Se precisar de duas linhas, reduzir o zoom e abrir espaço acima da cabeça.
+Se precisar de duas linhas, reduzir o zoom e abrir espaço acima da cabeça
+com fundo desfocado e escurecido da webcam; reservar também folga para o
+movimento, sem copiar uma faixa com cabelo para cima da pessoa.
 
 ## R21 — Uma linha de legenda por vez
 Por quê: linhas acumuladas escondem a tela e tornam incerta a palavra atual.
@@ -114,8 +124,9 @@ Pessoa revisora confere controles e textos cortados.
 
 ## R24 — Respeite as áreas seguras
 Por quê: controles do player podem cobrir texto nas bordas.
-Quem checa: quadros, com os limites da marca. O topo é 0,6% nesta marca
-para acomodar o título acima da testa; laterais e base continuam em 6% e 20%.
+Quem checa: quadros, com os limites da marca. Topo de 10% (192 px),
+laterais de 6% e base de 20%. O enquadramento deve abrir espaço acima
+do cabelo para o título com fonte mínima de 80 px; nunca reduzir o limite.
 
 ## R25 — Verifique imagem, movimento e áudio
 Por quê: um arquivo existente pode conter silêncio, tela preta ou imagem parada.
@@ -140,6 +151,25 @@ Quem checa: pessoa revisora, acrescentando regras pessoais a partir de R200.
 ## R30 — Confira a integridade do detector
 Por quê: um download truncado ou outro modelo não deve passar por YuNet válido.
 Quem checa: detector confere tamanho e SHA-256, inclusive com PES_YUNET.
+
+## R31 — Valide a anatomia antes de proteger uma face
+Por quê: uma mão junto ao rosto pode produzir caixa facial no YuNet; ampliar
+o espaço da legenda não corrige essa identificação falsa.
+Quem checa: detector exige os cinco pontos finitos próximos da caixa, olhos
+aproximadamente horizontais (desnível até metade da distância horizontal),
+distância horizontal entre olhos de 20% a 80% da largura, olhos acima do nariz
+e nariz acima dos cantos da boca, com separação vertical mínima de 2% da altura.
+Nariz e centro da boca ficam entre os olhos, com tolerância lateral de 15%/20%
+da distância entre eles; olhos até boca ocupam de 12% a 65% da altura.
+A face principal é a válida de maior pontuação (mínimo 0,65); secundárias
+exigem 0,80 e contam desde a primeira aparição, sem espera por estabilidade.
+Quadros mantém a proteção R20 inteira, inclusive abaixo do queixo.
+
+## R32 — Grave relatórios apenas no destino autorizado
+Por quê: conferir um vídeo externo não deve criar arquivos junto à entrada.
+Quem checa: `checar-quadros` salva automaticamente junto ao vídeo somente sob
+`<raiz>/episodios/<episódio>/` com `ep.json`; `--salvar <arquivo>` escolhe um
+destino explícito, inclusive para vídeos externos. A saída da CLI permanece disponível.
 
 ### Como a nota dos candidatos é calculada
 

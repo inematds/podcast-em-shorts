@@ -6,7 +6,7 @@ Roda em Linux (e Mac) com Python 3.10+, ffmpeg e OpenCV. Nada é publicado sozin
 ## Regras do projeto (não negociáveis)
 
 1. **Implementação original.** Não copiar código, textos, tabelas, números de pesquisa nem nomes de regra de nenhum kit de terceiros. Sem citar fonte, autor ou comunidade de origem em nenhum arquivo.
-2. **Nada publica.** Nenhum código chama API de rede social, agendador (Buffer, Blotato etc.), Supabase, Vercel ou nuvem. `exportar` só copia arquivos aprovados para uma pasta.
+2. **Nada publica.** Nenhum código chama API de rede social, agendador de posts, banco ou hospedagem na nuvem. `exportar` só copia arquivos aprovados para uma pasta.
 3. **Sem chave de API** em lugar nenhum. Tudo local: faster-whisper (opcional) ou importação de um JSON de transcrição pronto.
 4. **Valores de marca só em `marca/marca.json`** (cores, fonte, nome, @, duração mín/máx, quantidade de shorts). Nenhuma cor/fonte fixa no código.
 5. **Falha é falha.** Checagem que falha sai com código 1 e imprime o motivo. Nunca afrouxar um limite para um exemplo passar.

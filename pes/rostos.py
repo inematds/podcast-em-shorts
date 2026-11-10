@@ -55,6 +55,36 @@ def caminho_modelo(baixar=True):
     return destino
 
 
+def geometria_valida(face):
+    """Confere os cinco pontos YuNet na escala original da detecção.
+
+    Tolera inclinação moderada e assimetria; não depende da posição no vídeo.
+    A caixa sozinha não distingue uma mão de uma face.
+    """
+    if len(face) != 15 or not np.isfinite(face).all():
+        return False
+    x, y, w, h = face[:4]
+    if w <= 0 or h <= 0:
+        return False
+    pontos = np.asarray(face[4:14]).reshape(5, 2)
+    if (np.any(pontos < [x - .1 * w, y - .1 * h])
+            or np.any(pontos > [x + 1.1 * w, y + 1.1 * h])):
+        return False
+    esquerdo, direito = sorted(pontos[:2], key=lambda p: p[0])
+    nariz = pontos[2]
+    boca = pontos[3:].mean(axis=0)
+    distancia = direito[0] - esquerdo[0]
+    olhos_y = (esquerdo[1] + direito[1]) / 2
+    return bool(
+        .2 * w <= distancia <= .8 * w
+        and abs(direito[1] - esquerdo[1]) <= .5 * distancia
+        and max(esquerdo[1], direito[1]) + .02 * h < nariz[1]
+        and nariz[1] + .02 * h < min(pontos[3:, 1])
+        and esquerdo[0] - .15 * distancia <= nariz[0] <= direito[0] + .15 * distancia
+        and esquerdo[0] - .2 * distancia <= boca[0] <= direito[0] + .2 * distancia
+        and .12 * h <= boca[1] - olhos_y <= .65 * h)
+
+
 class Detector:
     """Reduz a imagem sem perder a webcam e devolve todas as faces confiáveis."""
 
@@ -74,8 +104,15 @@ class Detector:
         _, faces = self.rede.detect(quadro)
         if faces is None:
             return []
+        # A face principal é a de maior confiança com anatomia plausível.
+        # Secundárias exigem confiança maior, mas não precisam esperar uma trilha:
+        # um segundo rosto real deve ser protegido desde a primeira aparição.
+        faces = sorted((f for f in faces if geometria_valida(f) and f[14] >= .65),
+                       key=lambda f: -float(f[14]))
         caixas = []
-        for face in faces:
+        for i, face in enumerate(faces):
+            if i and face[14] < .8:
+                continue
             x, y, w, h = (face[:4] / escala).tolist()
             x0, y0 = max(0.0, x), max(0.0, y)
             x1, y1 = min(float(largura), x + w), min(float(altura), y + h)

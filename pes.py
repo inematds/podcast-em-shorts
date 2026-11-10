@@ -48,6 +48,7 @@ def parser():
             s.add_argument('mp4')
             s.add_argument('--legendas')
             s.add_argument('--fps', type=float, default=2)
+            s.add_argument('--salvar', metavar='ARQUIVO', help='Destino explícito do relatório JSON')
         if nome == 'checar-conteudo':
             s.add_argument('id')
         if nome == 'revisao':

@@ -1,10 +1,12 @@
 """Render determinístico CPU via ffmpeg, com áudio original e ASS temporizado."""
 import time
+import math
 from pathlib import Path
 from .util import episodio, ler, marca, palavras, raiz, salvar, executar, clips
 from .legenda import criar, titulo_linhas, fonte
 from .rostos import proteger_cabeca
 from .tela import expressao
+from .miniatura import gerar as gerar_miniatura
 
 
 def par(n):
@@ -14,6 +16,33 @@ def par(n):
 def filtro_corte(caixa):
     x, y, w, h = caixa
     return f'crop={int(w)}:{int(h)}:{int(x)}:{int(y)}'
+
+
+def sem_moldura(video, lay, c):
+    """Retira só borda branca contínua confirmada em três quadros da webcam."""
+    import cv2
+    import numpy as np
+    x, y, w, h = map(int, lay['camera'])
+    captura, quadros = cv2.VideoCapture(str(video)), []
+    try:
+        for fracao in (0, .5, .9):
+            captura.set(cv2.CAP_PROP_POS_MSEC, (c['s']+fracao*(c['e']-c['s']))*1000)
+            ok, q = captura.read()
+            if not ok:
+                raise ValueError('Falha ao conferir moldura da webcam.')
+            quadros.append(q[y:y+h, x:x+w])
+    finally:
+        captura.release()
+    cortes = []
+    for eixo, inverso in ((0, False), (0, True), (1, False), (1, True)):
+        linhas = [np.moveaxis(q, eixo, 0)[::(-1 if inverso else 1)] for q in quadros]
+        n = 0
+        while n < min(6, len(linhas[0])//4) and all(
+                (a[n].min(axis=1) > 200).mean() >= .98 for a in linhas):
+            n += 1
+        cortes.append(n)
+    topo, base, esquerda, direita = cortes
+    return dict(lay, camera=[x+esquerda, y+topo, w-esquerda-direita, h-topo-base])
 
 
 def tela(caixa, altura, prefixo, reserva=0, rodape=0):
@@ -50,29 +79,51 @@ def pan(lay, c, largura_crop, eixo=0, folga=0, total=None, alvo=None):
     return expr
 
 
+def recorte_camera(lay, c, m, pasta_marca):
+    """Uma caixa fixa e inteira dentro da webcam, inclusive após arredondar."""
+    x, y, w, h = lay['camera']
+    fx, fy, fw, fh = lay['rosto_medio']
+    # Após limpar a moldura, preservar o topo: o cabelo pode chegar até ele.
+    x0, y0 = math.ceil(x / 2) * 2, math.ceil(y / 2) * 2
+    x1, y1 = int((x+w) // 2) * 2, int((y+h) // 2) * 2
+    if x1-x0 < 2 or y1-y0 < 2:
+        raise ValueError('Webcam pequena demais para recorte seguro.')
+    linhas, tam = titulo_linhas(c['titulo'], m, pasta_marca)
+    f = fonte(m, pasta_marca, tam)
+    passo = max(f.getbbox(t)[3]-f.getbbox(t)[1] for t in linhas)+8
+    fim_titulo = math.ceil(1920*m['area_segura']['topo']) + passo*len(linhas)
+    # Face >= 300 px, título acima do cabelo com a mesma margem do checker.
+    # Reduzir o recorte inferior permite deslocar a pessoa sem sair da webcam.
+    escala = 302/fh
+    cabelo = lay.get('cabelo_min', fy-.25*fh)-y0
+    queixo = lay.get('queixo_max', fy+fh)-y0
+    minimo_y = max(0, fim_titulo+1920*.04+10-cabelo*escala)
+    maximo_y = 974-1920*.04-2-queixo*escala
+    if minimo_y > maximo_y:
+        raise ValueError(f'Sem enquadramento seguro: y mínimo {minimo_y:.1f} > '
+                         f'máximo {maximo_y:.1f}; título termina em {fim_titulo}px.')
+    dy = math.ceil((minimo_y+maximo_y)/2)
+    ch = par(min(y1-y0, (944-dy)/escala))
+    cw = min(x1-x0, par(1080/escala))
+    if ch < fy-y0+fh or cw < fw:
+        raise ValueError('Webcam sem espaço para título seguro e cabeça inteira; ajuste a gravação.')
+    # Ancorar no topo preserva o cabelo mesmo quando a pessoa se levanta.
+    cy = y0
+    cx = max(x0, min(x1-cw, int((fx+fw/2-cw/2) // 2)*2))
+    dw, dh = par(cw*escala), par(ch*escala)
+    # A folga inferior mantém o queixo protegido longe da faixa de legenda.
+    return [cx, cy, cw, ch], [dw, dh, (1080-dw)//2, dy]
+
+
 def geometria(lay, c, m, pasta_marca=None):
     modo, face = lay['modo'], lay['rosto_medio']
     rosto = None
     if modo == 'tela+camera':
-        x, y, w, h = lay['camera']
+        camera, (dw, dh, dx, dy) = recorte_camera(
+            lay, c, m, pasta_marca or Path(__file__).resolve().parents[1])
         fx, fy, fw, fh = face
-        # Inset elimina a moldura. O recorte vertical mantém cabelo e ombros,
-        # ampliando sem introduzir pad ou pixels externos à webcam.
-        x, y, w, h = x+w*.03, y+h*.03, w*.94, h*.94
-        linhas, tam = titulo_linhas(c['titulo'], m, (pasta_marca or Path(__file__).resolve().parents[1]))
-        reserva = 0
-        if len(linhas) == 2:
-            f = fonte(m, (pasta_marca or Path(__file__).resolve().parents[1]), tam)
-            reserva = par(32 + 2*(max(f.getbbox(t)[3]-f.getbbox(t)[1] for t in linhas)+24))
-        util = 960-reserva
-        ch = par(min(h, fh*2.26 if not reserva else util*fh/310))
-        cw = par(ch*1080/util)
-        cy = max(y, min(y+h-ch, fy-.9*fh))
-        cx = max(x, min(x+w-cw, fx+fw/2-cw/2))
-        camera = [par(cx), par(cy), cw, ch]
-        escala = util/ch
-        rosto = [(fx-camera[0])*1080/cw, reserva + (fy-camera[1])*escala,
-                 fw*1080/cw, fh*escala]
+        cx, cy, cw, ch = camera
+        rosto = [dx+(fx-cx)*dw/cw, dy+(fy-cy)*dh/ch, fw*dw/cw, fh*dh/ch]
         tm = m.get('tela_modo', 'auto')
         if tm not in ('auto', 'inteira', 'preencher'):
             raise ValueError('tela_modo deve ser auto, inteira ou preencher.')
@@ -87,15 +138,15 @@ def geometria(lay, c, m, pasta_marca=None):
             ey = expressao(lay.get('trilha_tela', []), c['s'], 1, crop_h, th)
             baixo = (f'[srcbaixo]{filtro_corte(lay["tela"])},'
                      f"crop={crop_w}:{crop_h}:x='{ex}':y='{ey}',scale=1080:820[baixo]")
-        cima = f'[srccam]{filtro_corte(camera)},scale=1080:{util},eq=brightness=0.04[cima]'
-        if reserva:
-            # Menos zoom na pessoa para abrir espaço acima da testa. O topo
-            # continua preenchido pelo fundo da própria webcam, sem moldura.
-            topo = [camera[0], camera[1], cw, par(min(ch*.22, fy-camera[1]-fh*.3))]
-            cima = (f'[srccam]split=2[head][person];[head]{filtro_corte(topo)},'
-                    f'scale=1080:{reserva},eq=brightness=0.04[headroom];'
-                    f'[person]{filtro_corte(camera)},scale=1080:{util},eq=brightness=0.04[personfg];'
-                    '[headroom][personfg]vstack=inputs=2[cima]')
+        # Folga sem imagem: degradê da marca, sem silhuetas da webcam.
+        # Se há imagem desde y=0, preservá-la opaca; senão, mesclar em 40 px.
+        transicao = (",format=yuva420p,geq=lum='lum(X,Y)':cb='cb(X,Y)':"
+                     "cr='cr(X,Y)':a='255*clip(Y/40,0,1)'" if dy > 0 else '')
+        cima = (f'color=c={fundo}:s=1080x960:r=30,'
+                "geq=lum='lum(X,Y)*(1+0.15*Y/H)':cb='cb(X,Y)':cr='cr(X,Y)'[cambg];"
+                f'[srccam]{filtro_corte(camera)},scale={dw}:{dh},eq=brightness=0.04'
+                f'{transicao}[personfg];'
+                f'[cambg][personfg]overlay={dx}:{dy}[cima]')
         grafo = (f'[0:v]split=2[srccam][srcbaixo];' + cima + ';'
                  + baixo + ';[cima]pad=1080:1100:0:0:color=' + fundo + '[faixa];'
                  '[faixa][baixo]vstack=inputs=2[base]')
@@ -127,11 +178,18 @@ def geometria(lay, c, m, pasta_marca=None):
 
 def renderizar(a, c, lay):
     pasta, m = episodio(a), marca(a)
+    if lay['modo'] == 'tela+camera':
+        from .enquadramento import medir_camera
+        lay = sem_moldura(pasta / 'raw/video.mp4', lay, c)
+        lay = medir_camera(pasta / 'raw/video.mp4', lay, c, m['titulo_segundos'])
     grafo, rosto = geometria(lay, c, m, raiz(a))
     ass = pasta / 'work' / (c['id'] + '.ass')
     protegido = proteger_cabeca(rosto, 1920 * .04) if rosto else None
     dados = criar(palavras(a), c, lay['modo'], protegido, m, raiz(a), ass)
     dados['rosto_esperado'] = rosto
+    if lay['modo'] == 'tela+camera':
+        camera, _ = recorte_camera(lay, c, m, raiz(a))
+        dados['recortes_camera'] = [{'t': 0.0, 'caixa': camera}]
     destino = pasta / 'clips' / (c['id'] + '.mp4')
     destino.parent.mkdir(parents=True, exist_ok=True)
     # Caminhos de filtros usam escapes próprios, separados dos argumentos do processo.
@@ -148,13 +206,18 @@ def renderizar(a, c, lay):
               '-c:a', 'aac', '-b:a', '160k', '-map_metadata', '-1', '-fflags', '+bitexact',
               '-flags:v', '+bitexact', '-flags:a', '+bitexact', '-movflags', '+faststart', temporario], timeout=120)
     temporario.replace(destino)
+    gerar_miniatura(destino, forcar=True)
     salvar(destino.with_suffix('.legendas.json'), dados)
     print('Render:', c['id'], f'({time.monotonic()-inicio:.1f}s)', destino)
 
 
 def rodar(a):
     pasta = episodio(a)
-    lay = ler(pasta / 'work/layout.json')
+    caminho_layout = pasta / 'work/layout.json'
+    if not caminho_layout.exists():
+        from .layout import analisar
+        salvar(caminho_layout, analisar(pasta / 'raw/video.mp4'))
+    lay = ler(caminho_layout)
     lista = clips(a)
     ids = set(a.ids)
     if not a.todos and not ids:

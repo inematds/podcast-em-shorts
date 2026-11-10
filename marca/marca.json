@@ -20,7 +20,7 @@
   },
   "shorts_por_episodio": 3,
   "area_segura": {
-    "topo": 0.006,
+    "topo": 0.10,
     "base": 0.2,
     "lados": 0.06
   },
